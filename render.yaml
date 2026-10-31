@@ -1,0 +1,18 @@
+# Render Blueprint: one Docker web service that serves the API and the website.
+services:
+  - type: web
+    name: kakashi-tutor
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: BASE_URL          # your Azure OpenAI endpoint, secret
+        sync: false
+      - key: API_KEY           # your Azure OpenAI key, secret
+        sync: false
+      - key: MODEL
+        value: gpt-4.1
+      - key: TEACHER_PASSWORD  # password for the teacher login
+        sync: false
+      - key: STUDENT_PASSWORD  # password for riya and arjun
+        sync: false

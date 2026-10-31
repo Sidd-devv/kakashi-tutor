@@ -23,7 +23,7 @@ LLM_URL = os.environ.get("BASE_URL", "")
 LLM_KEY = os.environ.get("API_KEY", "")
 LLM_MODEL = os.environ.get("MODEL", "gpt-4.1")
 
-DB_PATH = DATA / "kakashi.db"
+DB_PATH = Path(os.environ.get("DB_PATH") or DATA / "kakashi.db")  # point at a persistent disk when hosting
 CHAPTER_JSON = DATA / "life_processes.json"
 GRAPH_JSON = DATA / "concept_graph.json"
 GRAPH_REVIEW_MD = DATA / "concept_graph_review.md"

@@ -1,0 +1,178 @@
+{
+  "id": "respiration-60dabf",
+  "topic_id": "respiration",
+  "source": "cached",
+  "questions": [
+    {
+      "id": "respiration-60dabf-q1",
+      "concept_ids": [
+        "respiration_overview"
+      ],
+      "level": "recall",
+      "stem": "What is the main purpose of respiration in cells?",
+      "options": [
+        {
+          "key": "A",
+          "text": "To remove waste from the kidneys.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "To only help in breathing in oxygen.",
+          "misconception_id": "respiration_only_in_lungs"
+        },
+        {
+          "key": "C",
+          "text": "To provide energy for various life processes.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "To produce only carbon dioxide.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "C",
+      "source_section": "5.3",
+      "source_quote": "The food material taken in during the process of nutrition is used in cells to provide energy for various life processes.",
+      "explanation": "The quote states that respiration provides energy for life processes, making option A correct."
+    },
+    {
+      "id": "respiration-60dabf-q2",
+      "concept_ids": [
+        "aerobic_and_anaerobic_respiration"
+      ],
+      "level": "understanding",
+      "stem": "Which statement correctly compares aerobic and anaerobic respiration?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Anaerobic respiration does not release any energy.",
+          "misconception_id": "anaerobic_respiration_no_energy"
+        },
+        {
+          "key": "B",
+          "text": "Both release the same amount of energy.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "Aerobic respiration releases more energy than anaerobic respiration.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "Aerobic respiration releases less energy than anaerobic respiration.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "C",
+      "source_section": "5.3",
+      "source_quote": "The release of energy in this aerobic process is a lot greater than in the anaerobic process.",
+      "explanation": "The quote shows aerobic respiration releases more energy, so option A is correct."
+    },
+    {
+      "id": "respiration-60dabf-q3",
+      "concept_ids": [
+        "atp_energy_currency"
+      ],
+      "level": "understanding",
+      "stem": "What happens when the terminal phosphate bond in ATP is broken?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Energy is released for cellular reactions.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "ATP is converted to glucose.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "ATP stores energy permanently in the cell.",
+          "misconception_id": "atp_stores_energy_forever"
+        },
+        {
+          "key": "D",
+          "text": "No energy is released.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "A",
+      "source_section": "5.3",
+      "source_quote": "When the terminal phosphate linkage in ATP is broken using water, the energy equivalent to 30.5 kJ/mol is released.",
+      "explanation": "The quote explains that breaking the terminal phosphate releases energy, making A correct."
+    },
+    {
+      "id": "respiration-60dabf-q4",
+      "concept_ids": [
+        "gaseous_exchange_in_plants"
+      ],
+      "level": "understanding",
+      "stem": "How do plants exchange oxygen and carbon dioxide with the environment?",
+      "options": [
+        {
+          "key": "A",
+          "text": "By only releasing oxygen, not carbon dioxide.",
+          "misconception_id": "plants_only_release_oxygen"
+        },
+        {
+          "key": "B",
+          "text": "By pumping gases with specialized organs.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "By active transport through roots.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "By diffusion through stomata.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "D",
+      "source_section": "5.3",
+      "source_quote": "We have seen that plants exchange gases through stomata, and the large inter-cellular spaces ensure that all cells are in contact with air. Carbon dioxide and oxygen are exchanged by diffusion here.",
+      "explanation": "The quote states plants use diffusion through stomata to exchange gases, so A is correct."
+    },
+    {
+      "id": "respiration-60dabf-q5",
+      "concept_ids": [
+        "role_of_haemoglobin"
+      ],
+      "level": "understanding",
+      "stem": "What is the main role of haemoglobin in human respiration?",
+      "options": [
+        {
+          "key": "A",
+          "text": "To take up oxygen from the air in the lungs and carry it to tissues.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "To absorb carbon dioxide from the air.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "To filter dust from inhaled air.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "To dissolve oxygen directly in blood plasma.",
+          "misconception_id": "oxygen_dissolved_in_blood"
+        }
+      ],
+      "correct_key": "A",
+      "source_section": "5.3",
+      "source_quote": "Instead, respiratory pigments take up oxygen from the air in the lungs and carry it to tissues which are deficient in oxygen before releasing it. In human beings, the respiratory pigment is haemoglobin which has a very high affinity for oxygen.",
+      "explanation": "The quote explains haemoglobin carries oxygen to tissues, so A is correct."
+    }
+  ],
+  "rejected_by_validator": []
+}

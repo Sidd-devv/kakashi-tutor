@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS cache(key TEXT PRIMARY KEY, value TEXT, created_at TE
 
 
 def connect() -> sqlite3.Connection:
-    config.DATA.mkdir(exist_ok=True)
+    config.DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(config.DB_PATH, timeout=30)
     conn.row_factory = sqlite3.Row
     return conn

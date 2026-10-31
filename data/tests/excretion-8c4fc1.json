@@ -1,0 +1,178 @@
+{
+  "id": "excretion-8c4fc1",
+  "topic_id": "excretion",
+  "source": "cached",
+  "questions": [
+    {
+      "id": "excretion-8c4fc1-q1",
+      "concept_ids": [
+        "excretion_overview"
+      ],
+      "level": "recall",
+      "stem": "What is excretion in living organisms?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Excretion is the process of digesting food in the body.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "Excretion only refers to passing urine from the body.",
+          "misconception_id": "excretion_only_urine"
+        },
+        {
+          "key": "C",
+          "text": "The biological process involved in the removal of these harmful metabolic wastes from the body is called excretion.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "Excretion is only the removal of gaseous wastes like CO2.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "C",
+      "source_section": "5.5",
+      "source_quote": "The biological process involved in the removal of these harmful metabolic wastes from the body is called excretion.",
+      "explanation": "The quoted sentence defines excretion as the removal of harmful metabolic wastes, not just urine or gases."
+    },
+    {
+      "id": "excretion-8c4fc1-q2",
+      "concept_ids": [
+        "excretion_in_humans"
+      ],
+      "level": "understanding",
+      "stem": "Which organs make up the human excretory system?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Only the kidneys and bladder.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "Lungs and heart only.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "A pair of kidneys, a pair of ureters, a urinary bladder and a urethra.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "The stomach, intestines, and pancreas.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "C",
+      "source_section": "5.5.1",
+      "source_quote": "The excretory system of human beings (Fig. 5.13) includes a pair of kidneys, a pair of ureters, a urinary bladder and a urethra.",
+      "explanation": "The quote lists all the organs that form the human excretory system."
+    },
+    {
+      "id": "excretion-8c4fc1-q3",
+      "concept_ids": [
+        "nephron_and_urine_formation"
+      ],
+      "level": "understanding",
+      "stem": "What happens to most of the filtrate produced in the kidneys each day?",
+      "options": [
+        {
+          "key": "A",
+          "text": "None of the filtrate is re-absorbed.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "All the filtrate leaves the body as urine.",
+          "misconception_id": "all_filtrate_becomes_urine"
+        },
+        {
+          "key": "C",
+          "text": "The filtrate is converted into blood cells.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "Most of the filtrate is re-absorbed in the kidney tubules.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "D",
+      "source_section": "5.5.1",
+      "source_quote": "However, the volume actually excreted is only a litre or two a day, because the remaining filtrate is re- absorbed in the kidney tubules.",
+      "explanation": "The quote explains that most filtrate is re-absorbed, not excreted as urine."
+    },
+    {
+      "id": "excretion-8c4fc1-q4",
+      "concept_ids": [
+        "urine_storage_and_regulation"
+      ],
+      "level": "recall",
+      "stem": "Where is urine stored before it is passed out of the body?",
+      "options": [
+        {
+          "key": "A",
+          "text": "In the urinary bladder.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "In the lungs.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "In the urethra.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "In the kidneys.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "A",
+      "source_section": "5.5.1",
+      "source_quote": "Urine is stored in the urinary bladder until the pressure of the expanded bladder leads to the urge to pass it out through the urethra.",
+      "explanation": "The quote clearly states that urine is stored in the urinary bladder before being passed out."
+    },
+    {
+      "id": "excretion-8c4fc1-q5",
+      "concept_ids": [
+        "excretion_in_plants"
+      ],
+      "level": "understanding",
+      "stem": "How do plants get rid of some of their waste products?",
+      "options": [
+        {
+          "key": "A",
+          "text": "By converting waste into food.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "By excreting all waste through roots only.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "By storing waste in leaves that fall off or in vacuoles.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "By not producing any waste at all.",
+          "misconception_id": "plants_do_not_excrete"
+        }
+      ],
+      "correct_key": "C",
+      "source_section": "5.5.2",
+      "source_quote": "Many plant waste products are stored in cellular vacuoles. Waste products may be stored in leaves that fall off.",
+      "explanation": "The quote shows that plants store waste in vacuoles and leaves that fall off as a way to remove waste."
+    }
+  ],
+  "rejected_by_validator": []
+}

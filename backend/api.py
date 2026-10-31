@@ -4,10 +4,12 @@
 
 Interactive docs: http://localhost:8000/docs
 """
+import collections
 import secrets
+import time
 from typing import Optional
 
-from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -19,6 +21,17 @@ app = FastAPI(title="Kakashi Tutor", version="0.1")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 SESSIONS: dict[str, int] = {}
+_HITS: dict[str, list[float]] = collections.defaultdict(list)
+
+
+def rate_limit(key: str, limit: int, per: int = 60) -> None:
+    """Simple per-key limit so a public link cannot be used to run up the AI bill."""
+    now = time.time()
+    recent = [t for t in _HITS[key] if now - t < per]
+    if len(recent) >= limit:
+        raise HTTPException(429, "Too many requests. Please wait a minute and try again.")
+    recent.append(now)
+    _HITS[key] = recent
 
 
 @app.on_event("startup")
@@ -63,8 +76,9 @@ class Login(BaseModel):
 
 
 @app.post("/auth/login")
-def login(body: Login):
-    row = db.one("SELECT id, password FROM users WHERE username=?", (body.username.strip().lower(),))
+def login(body: Login, request: Request):
+    rate_limit(f"login:{request.client.host if request.client else '?'}", 20)
+    row =db.one("SELECT id, password FROM users WHERE username=?", (body.username.strip().lower(),))
     if not row or row["password"] != seed.hash_password(body.password):
         raise HTTPException(401, "wrong username or password")
     token = secrets.token_urlsafe(24)
@@ -119,6 +133,8 @@ class StartAttempt(BaseModel):
 
 @app.post("/attempts")
 def start_attempt(body: StartAttempt, user: dict = Depends(student_only)):
+    if body.fresh or body.targeted:  # these build a new test with the AI, so they cost the most
+        rate_limit(f"build:{user['id']}", 4)
     return orch.start_attempt(user["id"], body.topic_id, body.fresh, body.targeted)
 
 
@@ -135,6 +151,7 @@ class Submit(BaseModel):
 
 @app.post("/attempts/{attempt_id}/submit")
 def submit(attempt_id: int, body: Submit, user: dict = Depends(student_only)):
+    rate_limit(f"submit:{user['id']}", 8)
     return orch.submit_attempt(attempt_id, user["id"], [a.model_dump() for a in body.answers])
 
 
@@ -162,6 +179,7 @@ class ExplainIn(BaseModel):
 
 @app.post("/explain")
 def explain(body: ExplainIn, user: dict = Depends(student_only)):
+    rate_limit(f"explain:{user['id']}", 15)
     return orch.explain_again(user["id"], body.concept_id, body.attempt_id, body.request, body.didnt_understand)
 
 

@@ -1,0 +1,178 @@
+{
+  "id": "transportation-992c3f",
+  "topic_id": "transportation",
+  "source": "cached",
+  "questions": [
+    {
+      "id": "transportation-992c3f-q1",
+      "concept_ids": [
+        "transportation_in_humans_overview"
+      ],
+      "level": "recall",
+      "stem": "What does blood transport in the human body?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Only carbon dioxide.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "Only waste materials.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "Only oxygen.",
+          "misconception_id": "blood_only_carries_oxygen"
+        },
+        {
+          "key": "D",
+          "text": "Food, oxygen, and waste materials.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "D",
+      "source_section": "5.4.1",
+      "source_quote": "We have seen in previous sections that blood transports food, oxygen and waste materials in our bodies.",
+      "explanation": "The quote states that blood transports food, oxygen, and waste materials, making option A correct."
+    },
+    {
+      "id": "transportation-992c3f-q2",
+      "concept_ids": [
+        "double_circulation"
+      ],
+      "level": "understanding",
+      "stem": "Why is the separation of the right and left side of the heart important in humans?",
+      "options": [
+        {
+          "key": "A",
+          "text": "It helps blood flow only once through the heart in each cycle.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "It prevents blood from reaching the lungs.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "It keeps oxygenated and deoxygenated blood from mixing.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "It allows oxygenated and deoxygenated blood to mix for better circulation.",
+          "misconception_id": "blood_mixes_in_heart"
+        }
+      ],
+      "correct_key": "C",
+      "source_section": "5.4.1",
+      "source_quote": "The separation of the right side and the left side of the heart is useful to keep oxygenated and de- oxygenated blood from mixing.",
+      "explanation": "The quote explains that the separation prevents mixing of oxygenated and deoxygenated blood, supporting option A."
+    },
+    {
+      "id": "transportation-992c3f-q3",
+      "concept_ids": [
+        "blood_vessels_and_lymph"
+      ],
+      "level": "recall",
+      "stem": "Which statement is true about arteries and veins?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Arteries bring blood back to the heart.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "Veins have thick, elastic walls like arteries.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "Veins carry blood under high pressure.",
+          "misconception_id": "veins_high_pressure"
+        },
+        {
+          "key": "D",
+          "text": "Arteries carry blood away from the heart under high pressure.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "D",
+      "source_section": "5.4.1",
+      "source_quote": "Arteries are the vessels which carry blood away from the heart to various organs of the body. Since the blood emerges from the heart under high pressure, the arteries have thick, elastic walls.",
+      "explanation": "The quote confirms that arteries carry blood away from the heart under high pressure, making option A correct."
+    },
+    {
+      "id": "transportation-992c3f-q4",
+      "concept_ids": [
+        "transpiration_and_water_transport"
+      ],
+      "level": "understanding",
+      "stem": "What is the main function of transpiration in plants?",
+      "options": [
+        {
+          "key": "A",
+          "text": "It only cools the plant and has no role in water movement.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "It stores water in the leaves.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "It is a wasteful process that removes excess water only.",
+          "misconception_id": "transpiration_is_wasteful"
+        },
+        {
+          "key": "D",
+          "text": "It helps in the absorption and upward movement of water and minerals.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "D",
+      "source_section": "5.4.2",
+      "source_quote": "Thus, transpiration helps in the absorption and upward movement of water and minerals dissolved in it from roots to the leaves.",
+      "explanation": "The quote states that transpiration helps in the absorption and upward movement of water and minerals, supporting option A."
+    },
+    {
+      "id": "transportation-992c3f-q5",
+      "concept_ids": [
+        "translocation_in_phloem"
+      ],
+      "level": "understanding",
+      "stem": "How does phloem transport food in plants?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Phloem does not transport food at all.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "Phloem only moves food downward.",
+          "misconception_id": "phloem_only_moves_down"
+        },
+        {
+          "key": "C",
+          "text": "Phloem only moves water upward.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "Phloem can move materials in both upward and downward directions.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "D",
+      "source_section": "5.4.2",
+      "source_quote": "The translocation of food and other substances takes place in the sieve tubes with the help of adjacent companion cells both in upward and downward directions.",
+      "explanation": "The quote shows that phloem moves materials both upward and downward, making option A correct."
+    }
+  ],
+  "rejected_by_validator": []
+}

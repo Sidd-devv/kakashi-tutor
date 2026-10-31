@@ -92,6 +92,41 @@ sample students** that fill the teacher's class view.
 
 The first time a topic is opened, its test is generated and validated live (about 15 seconds). It is cached afterwards.
 
+## Deploy it (one service)
+
+The app deploys as a single service: `backend/main.py` serves the API under `/api` and the built website at `/`.
+The `Dockerfile` builds both. `render.yaml` is a ready Render Blueprint.
+
+**On Render:** New, Blueprint, pick this repo. Then set these environment variables in the dashboard (they are secrets,
+never commit them):
+
+| Variable | Value |
+|---|---|
+| `BASE_URL` | your Azure OpenAI endpoint |
+| `API_KEY` | your Azure OpenAI key |
+| `MODEL` | `gpt-4.1` (your deployment name) |
+| `TEACHER_PASSWORD` | password for the `teacher` login |
+| `STUDENT_PASSWORD` | password for `riya` and `arjun` |
+
+Optional: `DB_PATH` (for example `/data/kakashi.db` on a persistent disk). Without it the database lives on the
+container disk and is rebuilt from the seed whenever the service restarts, which is fine for a demo.
+Optional build argument `VITE_DEMO_PASSWORD` makes the three demo cards sign in with one click, but it puts that password
+in the public website, so only use it with a throwaway password.
+
+Free hosts put idle services to sleep, so open the site a minute before a demo. Sign-ins reset when the service restarts.
+
+**Quick check without Docker:**
+
+```powershell
+npm --prefix frontend run build
+```
+
+```powershell
+.venv\Scripts\python -m uvicorn backend.main:app --port 8000
+```
+
+Open http://localhost:8000 (website and API on one port).
+
 ## Useful commands
 
 | What | Command |

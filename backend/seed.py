@@ -7,6 +7,8 @@ Demo logins (test values for the hackathon demo): teacher / riya / arjun, passwo
 The 20 sim01..sim20 students are SIMULATED sample data so the class view is not empty. Label them as such in the UI.
 """
 import hashlib
+import json
+import os
 import random
 import sys
 from datetime import date, timedelta
@@ -23,10 +25,28 @@ def hash_password(pw: str) -> str:
     return hashlib.sha256(("kakashi-demo:" + pw).encode()).hexdigest()
 
 
+# On a public deployment set TEACHER_PASSWORD and STUDENT_PASSWORD; locally they default to the demo password.
+PASSWORDS = {
+    "teacher": os.environ.get("TEACHER_PASSWORD") or DEMO_PASSWORD,
+    "student": os.environ.get("STUDENT_PASSWORD") or DEMO_PASSWORD,
+}
+
+
 def _add_user(username, name, role, interest="", age_group="gen_z", sim=0):
+    pw = hash_password(PASSWORDS["teacher" if role == "teacher" else "student"])
     if not db.one("SELECT id FROM users WHERE username=?", (username,)):
         db.execute("INSERT INTO users(username,password,role,name,interest,age_group,is_simulated) VALUES(?,?,?,?,?,?,?)",
-                   (username, hash_password(DEMO_PASSWORD), role, name, interest, age_group, sim))
+                   (username, pw, role, name, interest, age_group, sim))
+    else:
+        db.execute("UPDATE users SET password=? WHERE username=?", (pw, username))  # keep passwords in step with the settings
+
+
+def load_cached_tests() -> None:
+    """Load the reviewed, pre-built tests that ship in data/tests so a fresh database needs no live generation."""
+    for f in sorted(config.TESTS_DIR.glob("*.json")):
+        t = json.loads(f.read_text(encoding="utf-8"))
+        if t.get("source") == "cached" and not db.one("SELECT 1 FROM tests WHERE id=?", (t["id"],)):
+            db.execute("INSERT INTO tests(id, topic_id, json, source) VALUES(?,?,?,?)", (t["id"], t["topic_id"], json.dumps(t), "cached"))
 
 
 def seed_simulated_class(rng: random.Random) -> None:
@@ -69,6 +89,7 @@ def run(reset: bool = False) -> None:
     _add_user("arjun", "Arjun", "student", "cricket", "gen_z")
     if config.GRAPH_JSON.exists():
         seed_simulated_class(random.Random(7))
+    load_cached_tests()
     n = db.one("SELECT COUNT(*) AS n FROM users")["n"]
     print(f"database ready: {n} users. demo logins: teacher / riya / arjun, password {DEMO_PASSWORD}")
 
