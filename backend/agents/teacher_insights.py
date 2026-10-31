@@ -3,7 +3,7 @@ import json
 
 from ..llm import call_json
 from ..registry import team_brief
-from ..schemas import ClassPlans, StudentProfile
+from ..schemas import ClassPlans, Interests, StudentProfile
 
 PROFILE_SYSTEM = team_brief("teacher_insights") + """
 
@@ -13,6 +13,8 @@ test results. Be specific and practical, in plain language a busy teacher can ac
 - strengths: up to 3.   watch_outs: up to 3 (for example overconfidence, guessing, a prerequisite gap).
 - how_to_approach: 3 concrete teaching moves for this student (what to start with, what to avoid, what style to use).
 - best_explanation_style: the style that worked best for them, or "not enough data yet".
+- The data lists the student's interests (what they chose, and what they later asked their tutor to explain things
+  through) and their recent requests. Use them in how_to_approach, for example which kind of example to reach for.
 
 Output JSON: {"thinking_summary":"","strengths":[],"watch_outs":[],"how_to_approach":[],"best_explanation_style":""}
 """
@@ -28,6 +30,23 @@ concept facts given (NCERT Class 10 level).
 
 Output JSON: {"plans":[{"concept_id":"","misconception":"","explain_in_5_minutes":"","analogy":"","practice_questions":[]}]}
 """
+
+
+INTERESTS_SYSTEM = team_brief("teacher_insights") + """
+
+Task now: a student typed a request asking their tutor to explain something in a certain way. Name the interest or
+topic of the examples they want, as short noun phrases a teacher would recognise (for example "Marvel", "cricket",
+"cooking", "movies"). Return an empty list when the request names no interest, such as "explain it more simply" or
+"give me an everyday example". At most 3 items, each under 30 characters, written as the student would say them.
+
+Output JSON: {"interests":[""]}
+"""
+
+
+def interests_from_request(request: str) -> list[str]:
+    r = call_json("teacher_insights", INTERESTS_SYSTEM, f"STUDENT REQUEST: {request}", schema=Interests,
+                  temperature=0.0, max_tokens=120)
+    return [i.strip()[:30] for i in r.interests if i.strip()][:3]
 
 
 def student_profile(data: dict) -> StudentProfile:

@@ -38,6 +38,11 @@ def seed_simulated_class(rng: random.Random) -> None:
         username = f"sim{i:02d}"
         _add_user(username, name, "student", rng.choice(SIM_INTERESTS), rng.choice(["gen_z", "gen_z", "millennial"]), sim=1)
         uid = db.one("SELECT id FROM users WHERE username=?", (username,))["id"]
+        own = db.one("SELECT interest FROM users WHERE id=?", (uid,))["interest"]
+        if i % 3 == 0:  # a few sample students have also asked their tutor for examples from something else
+            extra = SIM_INTERESTS[(i * 3 + 1) % len(SIM_INTERESTS)]
+            if extra != own:
+                db.execute("INSERT OR IGNORE INTO student_interests(user_id, interest, times) VALUES(?,?,?)", (uid, extra, 1 + i % 3))
         if db.one("SELECT 1 FROM mastery WHERE user_id=?", (uid,)):
             continue
         rows, misc = [], []

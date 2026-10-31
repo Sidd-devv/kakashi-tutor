@@ -187,6 +187,11 @@ def teacher_class(_: dict = Depends(teacher_only)):
     return orch.class_overview()
 
 
+@app.get("/teacher/activity")
+def teacher_activity(_: dict = Depends(teacher_only)):
+    return orch.activity()
+
+
 @app.get("/teacher/class/plans")
 def teacher_plans(_: dict = Depends(teacher_only)):
     return orch.class_plans()

@@ -30,7 +30,10 @@ CREATE TABLE IF NOT EXISTS misconception_log(
 CREATE TABLE IF NOT EXISTS explanations(
   id INTEGER PRIMARY KEY, user_id INTEGER, attempt_id INTEGER, concept_id TEXT, style TEXT, text TEXT,
   analogy_used TEXT, check_question TEXT, fact_check TEXT, helped INTEGER,
-  created_at TEXT DEFAULT CURRENT_TIMESTAMP);
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP, request TEXT DEFAULT '');
+CREATE TABLE IF NOT EXISTS student_interests(
+  user_id INTEGER, interest TEXT COLLATE NOCASE, times INTEGER DEFAULT 1, last_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY(user_id, interest));
 CREATE TABLE IF NOT EXISTS cache(key TEXT PRIMARY KEY, value TEXT, created_at TEXT DEFAULT CURRENT_TIMESTAMP);
 """
 
@@ -45,6 +48,9 @@ def connect() -> sqlite3.Connection:
 def init() -> None:
     with closing(connect()) as c:
         c.executescript(SCHEMA)
+        cols = {r["name"] for r in c.execute("PRAGMA table_info(explanations)")}
+        if "request" not in cols:  # databases created before requests were tracked
+            c.execute("ALTER TABLE explanations ADD COLUMN request TEXT DEFAULT ''")
         c.commit()
 
 

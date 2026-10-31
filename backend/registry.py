@@ -57,7 +57,8 @@ AGENTS = {
     },
     "teacher_insights": {
         "task": "Turn learner-model data into a thinking profile per student and ready re-teach plans for "
-                "class-wide gaps, so the teacher knows how to approach each student and what to re-teach.",
+                "class-wide gaps, so the teacher knows how to approach each student and what to re-teach. Also "
+                "reads each student's requests to the tutor and names the interests behind them.",
         "input": "Mastery, diagnoses, confidence calibration, explanation styles that worked, class aggregates",
         "output": "StudentProfile and ReteachPlan list",
         "depends_on": ["diagnoser", "explainer", "ingestion"],

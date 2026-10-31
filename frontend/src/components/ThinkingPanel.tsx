@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Check } from "lucide-react";
 import { api } from "../api";
 import type { TraceEntry } from "../types";
 import { TutorOrb } from "./TutorOrb";
@@ -36,22 +35,22 @@ export function ThinkingPanel({ title, hint }: { title: string; hint?: string })
   }, []);
 
   return (
-    <div className="card mx-auto flex max-w-xl flex-col items-center gap-5 p-8 text-center fade-up">
-      <TutorOrb size={96} speaking />
+    <div className="card mx-auto flex max-w-lg flex-col items-center gap-5 p-8 text-center fade-up">
+      <TutorOrb size={72} speaking />
       <div>
-        <div className="text-lg font-semibold">{title}</div>
+        <div className="text-[17px] font-semibold">{title}</div>
         {hint && <div className="mt-1 text-sm text-mute">{hint}</div>}
       </div>
-      <ul className="w-full space-y-2 text-left text-sm">
+      <ul className="w-full space-y-1.5 text-left text-sm">
         {fresh.slice(-5).map((t, i) => (
-          <li key={key(t) + i} className="flex items-center gap-2.5 rounded-lg border border-line bg-panel/70 px-3 py-2 fade-up">
-            <Check size={14} className="text-good" />
-            <span className="flex-1 text-ink">{AGENT_TEXT[t.agent] ?? t.agent}</span>
+          <li key={key(t) + i} className="flex items-center gap-3 rounded-md border border-line bg-bg px-3 py-2 fade-up">
+            <span className="size-1.5 rounded-full bg-good" />
+            <span className="flex-1">{AGENT_TEXT[t.agent] ?? t.agent}</span>
             <span className="text-xs text-faint">{t.seconds}s</span>
           </li>
         ))}
-        <li className="flex items-center gap-2.5 px-3 py-1 text-faint">
-          <span className="size-1.5 animate-pulse rounded-full bg-accent" /> working…
+        <li className="flex items-center gap-3 px-3 py-1 text-faint">
+          <span className="size-1.5 animate-pulse rounded-full bg-accent" /> Working
         </li>
       </ul>
     </div>

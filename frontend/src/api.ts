@@ -1,5 +1,5 @@
 import type {
-  AnswerIn, ClassOverview, Explanation, Progress, ReteachPlan, Results, StartedAttempt, StudentDetail, Subject,
+  ActivityEvent, AnswerIn, ClassOverview, Explanation, Progress, ReteachPlan, Results, StartedAttempt, StudentDetail, Subject,
   TraceEntry, User,
 } from "./types";
 
@@ -52,6 +52,7 @@ export const api = {
 
   teacherClass: () => call<ClassOverview>("GET", "/teacher/class"),
   teacherPlans: () => call<ReteachPlan[]>("GET", "/teacher/class/plans"),
+  teacherActivity: () => call<ActivityEvent[]>("GET", "/teacher/activity"),
   teacherStudent: (id: number) => call<StudentDetail>("GET", `/teacher/students/${id}`),
 
   trace: () => call<TraceEntry[]>("GET", "/trace"),

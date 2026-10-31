@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Check, HelpCircle, Send, ShieldCheck, Sparkles, ThumbsUp } from "lucide-react";
 import { api } from "../api";
 import { useAuth } from "../auth";
 import { TutorOrb } from "../components/TutorOrb";
@@ -34,33 +33,30 @@ function Card({ first, attemptId }: { first: Explanation; attemptId: number }) {
     try { await api.feedback(cur.explanation_id, true); } catch { /* feedback is best effort */ }
   }
 
-  const quick = [
-    ...(user?.interest ? [`Explain it like ${user.interest}`] : []),
-    "Explain it like a movie", "Give me an everyday example",
-  ];
+  const likes = (user?.interest ?? "").split(",").map((s) => s.trim()).filter(Boolean).slice(0, 2);
+  const quick = [...likes.map((l) => `Explain it like ${l}`), "Explain it like a movie", "Give me an everyday example"];
 
   return (
-    <div className="card overflow-hidden fade-up">
+    <div className="card overflow-hidden">
       <div className="flex flex-wrap items-center gap-3 border-b border-line px-6 py-4">
-        <h3 className="text-[17px] font-semibold">{first.concept_name}</h3>
-        <Badge color="#818cf8">{STYLE_LABEL[cur.style] ?? cur.style}</Badge>
-        <span className="ml-auto flex items-center gap-1.5 text-xs text-mute" title="Every explanation is checked against the NCERT text before you see it">
-          <ShieldCheck size={14} className="text-good" />
+        <h3 className="text-base font-semibold">{first.concept_name}</h3>
+        <Badge color="#93a0b5">{STYLE_LABEL[cur.style] ?? cur.style}</Badge>
+        <span className="ml-auto text-xs text-mute" title="Every explanation is checked against the NCERT text before you see it">
           {cur.fact_check?.corrected ? "Fact-checker corrected this" : "Checked against NCERT"}
         </span>
       </div>
 
       <div className="p-6">
         {busy ? (
-          <div className="flex items-center gap-4"><TutorOrb size={44} speaking /><div className="flex-1 space-y-2"><Skeleton className="h-4 w-full" /><Skeleton className="h-4 w-4/5" /></div></div>
+          <div className="flex items-center gap-4"><TutorOrb size={40} speaking /><div className="flex-1 space-y-2"><Skeleton className="h-4 w-full" /><Skeleton className="h-4 w-4/5" /></div></div>
         ) : (
           <div key={cur.explanation_id} className="flex gap-4 fade-up">
-            <div className="hidden sm:block"><TutorOrb size={44} /></div>
+            <div className="hidden sm:block"><TutorOrb size={40} /></div>
             <div className="flex-1">
               <p className="whitespace-pre-line text-[15.5px] leading-[1.7]">{cur.text}</p>
               {cur.check_question && (
-                <div className="mt-4 rounded-xl border border-accent/25 bg-accent/8 p-3.5 text-[14px]">
-                  <div className="label-eyebrow mb-1 text-accent">Try saying it back</div>{cur.check_question}
+                <div className="mt-4 rounded-lg border border-line bg-raise p-3.5 text-[14px]">
+                  <div className="label-eyebrow mb-1">Try saying it back</div>{cur.check_question}
                 </div>
               )}
             </div>
@@ -69,17 +65,17 @@ function Card({ first, attemptId }: { first: Explanation; attemptId: number }) {
         {err && <div className="mt-3"><ErrorBox message={err} /></div>}
 
         <div className="mt-6 flex flex-wrap items-center gap-2">
-          <button className="btn btn-sm" disabled={busy} onClick={() => ask({ didnt_understand: true })}><HelpCircle size={14} /> I didn’t get that</button>
-          {quick.map((q) => <button key={q} className="btn btn-sm btn-ghost" disabled={busy} onClick={() => ask({ request: q })}><Sparkles size={13} className="text-accent2" /> {q}</button>)}
+          <button className="btn btn-sm" disabled={busy} onClick={() => ask({ didnt_understand: true })}>I didn’t get that</button>
+          {quick.map((q) => <button key={q} className="btn btn-sm btn-ghost" disabled={busy} onClick={() => ask({ request: q })}>{q}</button>)}
           <button className={`btn btn-sm ml-auto ${helped === cur.explanation_id ? "!border-good/50 !text-good" : ""}`} disabled={busy || helped === cur.explanation_id} onClick={good}>
-            {helped === cur.explanation_id ? <><Check size={14} /> Glad it helped</> : <><ThumbsUp size={14} /> This helped</>}
+            {helped === cur.explanation_id ? "Glad it helped" : "This helped"}
           </button>
         </div>
 
         <form className="mt-3 flex gap-2" onSubmit={(e) => { e.preventDefault(); if (custom.trim()) ask({ request: custom.trim() }); }}>
           <input className="input !h-10 text-[14px]" value={custom} onChange={(e) => setCustom(e.target.value)} disabled={busy}
             placeholder="Or ask in your own words, e.g. “explain it like a football match”" />
-          <button className="btn btn-primary btn-sm !h-10" disabled={busy || !custom.trim()} aria-label="Send"><Send size={15} /></button>
+          <button className="btn btn-primary btn-sm !h-10" disabled={busy || !custom.trim()}>Ask</button>
         </form>
 
         {thread.length > 1 && (
@@ -87,7 +83,7 @@ function Card({ first, attemptId }: { first: Explanation; attemptId: number }) {
             <summary className="cursor-pointer text-mute hover:text-ink">Earlier explanations ({thread.length - 1})</summary>
             <div className="mt-3 space-y-3">
               {thread.slice(0, -1).reverse().map((t) => (
-                <div key={t.explanation_id} className="rounded-xl border border-line bg-bg/40 p-4">
+                <div key={t.explanation_id} className="rounded-lg border border-line p-4">
                   <div className="mb-1.5 text-xs text-faint">{STYLE_LABEL[t.style] ?? t.style}</div>
                   <p className="leading-relaxed text-mute">{t.text}</p>
                 </div>
@@ -107,10 +103,10 @@ export default function ReviewPage() {
 
   return (
     <>
-      <Link to={`/results/${id}`} className="mb-4 inline-flex items-center gap-1.5 text-sm text-mute hover:text-ink"><ArrowLeft size={15} /> Back to results</Link>
+      <Link to={`/results/${id}`} className="mb-4 inline-block text-sm text-mute hover:text-ink">Back to results</Link>
       <PageHead eyebrow="Review" title="Let’s fix your mistakes together"
         sub="One explanation for each idea that tripped you up, in your style. If it doesn’t click, just say so and your tutor will try another way." />
-      <div className="mx-auto max-w-[820px] space-y-5">
+      <div className="mx-auto max-w-[800px] space-y-5">
         {rev.loading && <ThinkingPanel title="Your tutor is preparing explanations" hint="Each one is written for you and checked against the textbook." />}
         {rev.error && <ErrorBox message={rev.error} onRetry={rev.retry} />}
         {rev.data?.length === 0 && <div className="card p-8 text-center text-mute">No mistakes to review. Nicely done.</div>}

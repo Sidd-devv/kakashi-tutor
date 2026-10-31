@@ -1,5 +1,4 @@
 import { Component, lazy, Suspense, useState, type ReactNode } from "react";
-import { Box, ListTree } from "lucide-react";
 import type { MapConcept } from "../types";
 import { LEVEL_COLOR, LEVEL_LABEL } from "../lib";
 import ConceptMap2D from "./ConceptMap2D";
@@ -22,30 +21,30 @@ interface Props {
   focusTopic?: boolean;
 }
 
-/** The concept map: a glowing 3D view with a clean 2D fallback (also used if WebGL is unavailable). */
+/** The concept map: a 3D view with a clean 2D fallback (also used if WebGL is unavailable). */
 export default function ConceptMap({ concepts, selectedId, onSelect, height = 480, focusTopic = false }: Props) {
   const [mode, setMode] = useState<"3d" | "2d">("3d");
   const view = { concepts, selectedId, onSelect, height, focusTopic };
   return (
-    <div className="card relative overflow-hidden grid-bg" style={{ height }}>
-      <div className="absolute left-3 top-3 z-10 flex rounded-lg border border-line bg-panel/90 p-0.5 text-xs font-semibold">
-        {([["3d", Box, "3D"], ["2d", ListTree, "Layers"]] as const).map(([m, Icon, label]) => (
+    <div className="card relative overflow-hidden bg-[#0d121c]" style={{ height }}>
+      <div className="absolute left-3 top-3 z-10 flex rounded-md border border-line bg-panel p-0.5 text-xs font-semibold">
+        {([["3d", "3D"], ["2d", "Layers"]] as const).map(([m, label]) => (
           <button key={m} onClick={() => setMode(m)}
-            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1.5 transition ${mode === m ? "bg-accent/15 text-accent" : "text-mute hover:text-ink"}`}>
-            <Icon size={13} /> {label}
+            className={`rounded px-3 py-1.5 transition ${mode === m ? "bg-raise text-ink" : "text-faint hover:text-ink"}`}>
+            {label}
           </button>
         ))}
       </div>
-      <div className="absolute bottom-3 left-3 z-10 flex flex-wrap gap-x-4 gap-y-1 rounded-lg bg-panel/80 px-3 py-1.5 text-[11px] text-mute backdrop-blur">
+      <div className="absolute bottom-3 left-3 z-10 flex flex-wrap gap-x-4 gap-y-1 rounded-md bg-panel/90 px-3 py-1.5 text-[11px] text-mute">
         {(["strong", "shaky", "weak", "untested"] as const).map((l) => (
           <span key={l} className="flex items-center gap-1.5">
-            <span className="size-2 rounded-full" style={{ background: LEVEL_COLOR[l], boxShadow: `0 0 8px ${LEVEL_COLOR[l]}` }} />
+            <span className="size-2 rounded-full" style={{ background: LEVEL_COLOR[l] }} />
             {LEVEL_LABEL[l]}
           </span>
         ))}
       </div>
-      <div className="absolute bottom-3 right-3 z-10 hidden rounded-lg bg-panel/80 px-3 py-1.5 text-[11px] text-faint backdrop-blur sm:block">
-        {mode === "3d" ? "Drag to rotate · scroll to zoom · click a concept" : "Foundations on the left · click a concept"}
+      <div className="absolute bottom-3 right-3 z-10 hidden rounded-md bg-panel/90 px-3 py-1.5 text-[11px] text-faint sm:block">
+        {mode === "3d" ? "Drag to rotate, scroll to zoom, click a concept" : "Foundations on the left, click a concept"}
       </div>
       {mode === "3d" ? (
         <Boundary fallback={<ConceptMap2D {...view} />}>

@@ -110,7 +110,11 @@ export interface Progress {
   style_stats: Record<string, { shown: number; helped: number }>;
 }
 
+export interface Interest { name: string; source: "chosen" | "asked"; times: number }
+export interface ActivityEvent { type: "test" | "request"; at: string; student: string; text: string; concept?: string }
+
 export interface RosterStudent extends User {
+  interests: string[];
   avg_mastery: number | null;
   weak_concepts: number;
   at_risk: boolean;
@@ -144,6 +148,8 @@ export interface StudentDetail {
   concept_map: MapConcept[];
   calibration: { answers: number; wrong_but_confident: number; wrong_total: number; right_but_unsure: number; outcomes: Record<string, number> };
   misconceptions: { text: string; concept: string; times: number }[];
+  interests: Interest[];
+  recent_requests: { at: string; request: string; concept: string; style: string }[];
   style_stats: Record<string, { shown: number; helped: number }>;
   profile: {
     thinking_summary: string;

@@ -1,20 +1,16 @@
-import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Brain, Compass, ShieldAlert, Star } from "lucide-react";
 import { api } from "../api";
-import ConceptMap from "../components/ConceptMap";
 import { ThinkingPanel } from "../components/ThinkingPanel";
-import { Badge, Bar, ErrorBox, useAsync } from "../components/ui";
-import { LEVEL_COLOR, LEVEL_LABEL, OUTCOME, STYLE_LABEL, dateShort, initials, pct } from "../lib";
-import type { MapConcept, Outcome } from "../types";
+import { Bar, ErrorBox, useAsync } from "../components/ui";
+import { LEVEL_COLOR, ago, dateShort, pct } from "../lib";
 
-function List({ icon: Icon, title, items, color }: { icon: typeof Star; title: string; items: string[]; color: string }) {
+function List({ title, items }: { title: string; items: string[] }) {
   return (
-    <div className="rounded-xl border border-line bg-bg/40 p-4">
-      <div className="mb-2.5 flex items-center gap-2 text-sm font-semibold"><Icon size={15} style={{ color }} />{title}</div>
+    <div>
+      <div className="label-eyebrow mb-2">{title}</div>
       {items.length === 0 ? <p className="text-[13px] text-faint">Not enough data yet.</p> : (
         <ul className="space-y-2 text-[13.5px] leading-snug text-mute">
-          {items.map((t) => <li key={t} className="flex gap-2"><span className="mt-[7px] size-1 shrink-0 rounded-full" style={{ background: color }} />{t}</li>)}
+          {items.map((t) => <li key={t} className="flex gap-2.5"><span className="mt-[8px] size-1 shrink-0 rounded-full bg-faint" />{t}</li>)}
         </ul>
       )}
     </div>
@@ -23,83 +19,101 @@ function List({ icon: Icon, title, items, color }: { icon: typeof Star; title: s
 
 export default function TeacherStudent() {
   const { id = "" } = useParams();
-  const d = useAsync(() => api.teacherStudent(Number(id)), [id]);
-  const [sel, setSel] = useState<MapConcept | null>(null);
+  const d = useAsync(() => api.teacherStudent(Number(id)), [id], 10000);
 
-  if (d.loading) return <div className="py-6"><ThinkingPanel title="Building this student’s thinking profile" hint="The teacher-insights agent reads their answers, confidence and reasoning." /></div>;
-  if (d.error || !d.data) return <ErrorBox message={d.error ?? "Not found"} onRetry={d.retry} />;
+  if (d.loading && !d.data) return <div className="py-6"><ThinkingPanel title="Building this student’s thinking profile" hint="The teacher-insights agent reads their answers, confidence and reasoning." /></div>;
+  if (!d.data) return <ErrorBox message={d.error ?? "Not found"} onRetry={d.retry} />;
   const { student: s, profile, calibration: cal } = d.data;
-  const styles = Object.entries(d.data.style_stats).filter(([, v]) => v.shown > 0);
-  const outcomes = Object.entries(cal.outcomes) as [Outcome, number][];
+  const weak = d.data.concept_map.filter((c) => c.level === "weak").sort((a, b) => (a.p_known ?? 0) - (b.p_known ?? 0));
+  const names = new Map(d.data.concept_map.map((c) => [c.id, c.name]));
 
   return (
     <>
-      <Link to="/teacher" className="mb-4 inline-flex items-center gap-1.5 text-sm text-mute hover:text-ink"><ArrowLeft size={15} /> Class overview</Link>
+      <Link to="/teacher" className="mb-4 inline-block text-sm text-mute hover:text-ink">Back to class overview</Link>
 
-      <div className="mb-6 flex flex-wrap items-center gap-4 fade-up">
-        <span className="grid size-14 place-items-center rounded-2xl bg-gradient-to-br from-accent to-accent2 text-lg font-bold text-[#04101c]">{initials(s.name)}</span>
-        <div>
-          <h1 className="text-[28px] font-semibold leading-tight tracking-tight">{s.name}</h1>
-          <p className="text-sm text-mute">Loves {s.interest || "—"} · {s.age_group.replace("_", " ")} · {d.data.attempts.length} test{d.data.attempts.length === 1 ? "" : "s"} taken</p>
-        </div>
-        {s.is_simulated ? <span className="chip ml-auto">Simulated sample student</span> : <Badge color="#22d3ee">Live student</Badge>}
+      <div className="mb-6">
+        <h1 className="text-2xl font-semibold tracking-tight">{s.name}</h1>
+        <p className="mt-1 text-sm text-mute">
+          {s.is_simulated ? "Sample student" : "Live student"}, {s.age_group.replace("_", " ")}, {d.data.attempts.length} test{d.data.attempts.length === 1 ? "" : "s"} taken
+        </p>
       </div>
 
-      <section className="card p-6 fade-up">
-        <div className="mb-3 flex items-center gap-2"><Brain size={17} className="text-accent2" /><h2 className="font-semibold">How {s.name} thinks</h2></div>
+      <section className="card p-6">
+        <div className="label-eyebrow mb-3">How {s.name} thinks</div>
         <p className="max-w-3xl text-[16px] leading-relaxed">{profile.thinking_summary}</p>
-        <div className="mt-5 grid gap-3 md:grid-cols-3">
-          <List icon={Star} title="Strengths" items={profile.strengths} color="#34d399" />
-          <List icon={ShieldAlert} title="Watch out for" items={profile.watch_outs} color="#fbbf24" />
-          <List icon={Compass} title="How to approach" items={profile.how_to_approach} color="#22d3ee" />
+        <div className="mt-6 grid gap-6 border-t border-line pt-5 md:grid-cols-3">
+          <List title="Strengths" items={profile.strengths} />
+          <List title="Watch out for" items={profile.watch_outs} />
+          <List title="How to approach" items={profile.how_to_approach} />
         </div>
-        {profile.best_explanation_style && <p className="mt-4 text-xs text-faint">Explanation style that works best: <span className="text-mute">{profile.best_explanation_style}</span></p>}
+        {cal.answers > 0 && (
+          <p className="mt-5 border-t border-line pt-4 text-xs text-faint">
+            {cal.wrong_total > 0 && <>Very sure but wrong on {cal.wrong_but_confident} of {cal.wrong_total} wrong answers. </>}
+            {cal.right_but_unsure > 0 && <>Right but unsure on {cal.right_but_unsure}.</>}
+          </p>
+        )}
       </section>
 
-      <section className="mt-6 grid gap-4 lg:grid-cols-[1fr_340px]">
-        <div>
-          <div className="label-eyebrow mb-3">Concept map</div>
-          <ConceptMap concepts={d.data.concept_map} selectedId={sel?.id ?? null} onSelect={setSel} height={430} />
-        </div>
-        <div className="space-y-4">
-          <div className="card p-5">
-            <div className="label-eyebrow mb-2">{sel ? sel.name : "Select a concept"}</div>
-            {sel ? <><div className="mb-3 flex items-center gap-2"><Badge color={LEVEL_COLOR[sel.level]}>{LEVEL_LABEL[sel.level]}</Badge><span className="text-sm text-mute">{pct(sel.p_known)}</span></div><Bar value={sel.p_known ?? 0} color={LEVEL_COLOR[sel.level]} /></>
-              : <p className="text-sm text-mute">Click a node to see mastery for that concept.</p>}
-          </div>
-          <div className="card p-5">
-            <div className="label-eyebrow mb-3">Confidence vs. correctness</div>
-            {cal.answers === 0 ? <p className="text-sm text-mute">No answers recorded for this student.</p> : (
-              <div className="space-y-3 text-[13px]">
-                <div><div className="mb-1 flex justify-between text-mute"><span>Wrong but very sure</span><b className="text-ink">{cal.wrong_but_confident}/{cal.wrong_total}</b></div><Bar value={cal.wrong_total ? cal.wrong_but_confident / cal.wrong_total : 0} color="#f87171" height={6} /></div>
-                <div><div className="mb-1 flex justify-between text-mute"><span>Right but not sure</span><b className="text-ink">{cal.right_but_unsure}</b></div><Bar value={cal.answers ? cal.right_but_unsure / cal.answers : 0} color="#fbbf24" height={6} /></div>
-                <div className="flex flex-wrap gap-1.5 pt-1">{outcomes.map(([k, v]) => <Badge key={k} color={OUTCOME[k].color}>{OUTCOME[k].label} · {v}</Badge>)}</div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+      <div className="mt-6 grid gap-6 lg:grid-cols-2">
+        <section className="card p-6">
+          <div className="label-eyebrow mb-3">Interests</div>
+          {d.data.interests.length === 0 ? <p className="text-sm text-mute">No interests recorded yet.</p> : (
+            <div className="flex flex-wrap gap-2">
+              {d.data.interests.map((i) => (
+                <span key={i.name} className="inline-flex items-baseline gap-2 rounded-md border border-line bg-raise px-3 py-1.5 text-sm">
+                  <span className="font-medium">{i.name}</span>
+                  <span className="text-xs text-faint">{i.source === "chosen" ? `chosen${i.times ? `, asked ${i.times}x` : ""}` : `asked ${i.times}x`}</span>
+                </span>
+              ))}
+            </div>
+          )}
+          <div className="label-eyebrow mb-2 mt-6">What they asked the tutor</div>
+          {d.data.recent_requests.length === 0 ? <p className="text-sm text-mute">Nothing yet. Their requests will appear here as they use the tutor.</p> : (
+            <ul className="divide-y divide-line">
+              {d.data.recent_requests.map((r, i) => (
+                <li key={i} className="py-2.5 text-[13.5px]">
+                  <div className="flex justify-between gap-3"><span>{r.request.startsWith("(") ? "Did not understand the last explanation" : `“${r.request}”`}</span><span className="shrink-0 text-xs text-faint">{ago(r.at)}</span></div>
+                  <div className="text-xs text-faint">{r.concept}</div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
 
-      <section className="mt-6 grid gap-4 lg:grid-cols-3">
-        <div className="card p-5">
-          <div className="label-eyebrow mb-3">Beliefs caught</div>
-          {d.data.misconceptions.length === 0 ? <p className="text-sm text-mute">None recorded.</p> : (
-            <ul className="space-y-2.5 text-[13px]">{d.data.misconceptions.map((m) => <li key={m.text} className="rounded-lg border border-line p-3">“{m.text}”<div className="mt-1 text-xs text-faint">{m.concept} · {m.times}×</div></li>)}</ul>
+        <section className="card p-6">
+          <div className="label-eyebrow mb-3">Concepts to work on</div>
+          {weak.length === 0 ? <p className="text-sm text-mute">No weak concepts so far.</p> : (
+            <ul className="space-y-4">
+              {weak.slice(0, 6).map((c) => (
+                <li key={c.id}>
+                  <div className="mb-1.5 flex justify-between text-[13.5px]"><span className="font-medium">{c.name}</span><span className="text-faint">{pct(c.p_known)}</span></div>
+                  <Bar value={c.p_known ?? 0} color={LEVEL_COLOR.weak} height={5} />
+                  {c.root_causes.length > 0 && <div className="mt-1 text-xs text-faint">Weak underneath: {c.root_causes.map((r) => names.get(r) ?? r).join(", ")}</div>}
+                </li>
+              ))}
+            </ul>
           )}
-        </div>
-        <div className="card p-5">
-          <div className="label-eyebrow mb-3">Explanations that worked</div>
-          {styles.length === 0 ? <p className="text-sm text-mute">No feedback yet.</p> : (
-            <ul className="space-y-3">{styles.map(([k, v]) => <li key={k}><div className="mb-1 flex justify-between text-[13px]"><span>{STYLE_LABEL[k] ?? k}</span><span className="text-faint">{v.helped}/{v.shown}</span></div><Bar value={v.shown ? v.helped / v.shown : 0} color="#818cf8" height={6} /></li>)}</ul>
+          {d.data.misconceptions.length > 0 && (
+            <>
+              <div className="label-eyebrow mb-2 mt-6">Beliefs caught</div>
+              <ul className="space-y-2 text-[13.5px]">
+                {d.data.misconceptions.map((m) => <li key={m.text}>“{m.text}” <span className="text-xs text-faint">{m.concept}, {m.times}x</span></li>)}
+              </ul>
+            </>
           )}
-        </div>
-        <div className="card p-5">
+        </section>
+      </div>
+
+      {d.data.attempts.length > 0 && (
+        <section className="mt-6 card p-6">
           <div className="label-eyebrow mb-3">Tests</div>
-          {d.data.attempts.length === 0 ? <p className="text-sm text-mute">No tests yet.</p> : (
-            <ul className="space-y-2">{[...d.data.attempts].reverse().map((a) => <li key={a.id} className="flex items-center justify-between rounded-lg bg-raise/60 px-3 py-2.5 text-[13px]"><span className="capitalize">{a.topic_id}<span className="ml-2 text-xs text-faint">{dateShort(a.finished_at)}</span></span><b>{a.score}/{a.total}</b></li>)}</ul>
-          )}
-        </div>
-      </section>
+          <ul className="divide-y divide-line text-[13.5px]">
+            {[...d.data.attempts].reverse().map((a) => (
+              <li key={a.id} className="flex justify-between py-2.5"><span className="capitalize">{a.topic_id} <span className="ml-2 text-xs text-faint">{dateShort(a.finished_at)}</span></span><b>{a.score}/{a.total}</b></li>
+            ))}
+          </ul>
+        </section>
+      )}
     </>
   );
 }

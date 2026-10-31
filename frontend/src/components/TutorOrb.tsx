@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 export function TutorOrb({ size = 88, speaking = false }: { size?: number; speaking?: boolean }) {
   return (
     <div className={`orb ${speaking ? "orb-speaking" : ""}`} style={{ width: size, height: size }} aria-hidden>
-      <span className="orb-ring" /><span className="orb-ring" /><span className="orb-ring" />
+      <span className="orb-ring" /><span className="orb-ring" />
       <span className="orb-core" />
     </div>
   );

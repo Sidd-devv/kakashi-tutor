@@ -263,10 +263,40 @@ def briefing(attempt_id: int, user_id: int) -> dict:
 
 # ---------------------------------------------------------------- Flow C: explanations ---------
 
+def interests(user_id: int) -> list[dict]:
+    """What this student likes: what they chose at the start, plus what they later asked their tutor to use."""
+    chosen = [p.strip() for p in (get_user(user_id)["interest"] or "").split(",") if p.strip()]
+    out = [{"name": c, "source": "chosen", "times": 0} for c in chosen]
+    for r in db.query("SELECT interest, times FROM student_interests WHERE user_id=? ORDER BY times DESC, last_at DESC", (user_id,)):
+        low = r["interest"].lower()
+        same = next((o for o in out if o["name"].lower() in low or low in o["name"].lower()), None)
+        if same:
+            same["times"] += r["times"]
+        else:
+            out.append({"name": r["interest"], "source": "asked", "times": r["times"]})
+    return out
+
+
+def interest_text(user_id: int) -> str:
+    return ", ".join(i["name"] for i in interests(user_id)[:4])
+
+
+def _learn_interest(user_id: int, request: str) -> None:
+    """Runs in the background: work out what a student's request says they are interested in."""
+    try:
+        names = teacher_insights.interests_from_request(request)
+    except Exception:
+        return  # learning interests is a bonus; never break the student's explanation
+    for n in names:
+        db.execute("INSERT INTO student_interests(user_id, interest) VALUES(?, ?) "
+                   "ON CONFLICT(user_id, interest) DO UPDATE SET times = times + 1, last_at = CURRENT_TIMESTAMP", (user_id, n))
+
+
 def explain_with_check(user_id: int, attempt_id, concept_id: str, diagnosis, style: str,
-                       previous_text: str = "", request: str = "", feedback: str = "") -> dict:
+                       previous_text: str = "", request: str = "", feedback: str = "", log_request=None) -> dict:
     """Explainer -> fact-checker. If the checker rejects it, use its correction (and re-check once)."""
     student = get_user(user_id)
+    student["interest"] = interest_text(user_id)  # everything the student has shown they like
     e = explainer.explain(student, concept_id, diagnosis, style, previous_text, request, feedback)
     fc = fact_checker.check(e, concept_id)
     first_issues, corrected = list(fc.issues), False
@@ -280,10 +310,13 @@ def explain_with_check(user_id: int, attempt_id, concept_id: str, diagnosis, sty
             fc = fact_checker.check(e, concept_id)
             if not fc.approved and fc.corrected_text:
                 e.text = fc.corrected_text
-    eid = db.execute("INSERT INTO explanations(user_id, attempt_id, concept_id, style, text, analogy_used, check_question, fact_check) "
-                     "VALUES(?,?,?,?,?,?,?,?)",
+    eid = db.execute("INSERT INTO explanations(user_id, attempt_id, concept_id, style, text, analogy_used, check_question, fact_check, request) "
+                     "VALUES(?,?,?,?,?,?,?,?,?)",
                      (user_id, attempt_id, concept_id, e.style, e.text, e.analogy_used, e.check_question,
-                      json.dumps({"issues_found": first_issues, "corrected": corrected})))
+                      json.dumps({"issues_found": first_issues, "corrected": corrected}),
+                      log_request if log_request is not None else request))
+    if request.strip():
+        POOL.submit(_learn_interest, user_id, request.strip())
     return {"explanation_id": eid, "concept_id": concept_id, "concept_name": content.concept(concept_id).name,
             "style": e.style, "text": e.text, "analogy_used": e.analogy_used, "check_question": e.check_question,
             "fact_check": {"issues_found": first_issues, "corrected": corrected}}
@@ -332,8 +365,9 @@ def explain_again(user_id: int, concept_id: str, attempt_id=None, request: str =
     else:
         style = explainer.pick_style(tried, style_stats(user_id))
     last = prior[-1]["text"] if prior else ""
+    logged = request.strip() or ("(did not understand the previous explanation)" if didnt_understand else "")
     return explain_with_check(user_id, attempt_id, concept_id, None, style, last, request.strip(),
-                              "I didn't understand the last explanation." if didnt_understand else "")
+                              "I didn't understand the last explanation." if didnt_understand else "", log_request=logged)
 
 
 def explanation_feedback(user_id: int, explanation_id: int, helped: bool) -> None:
@@ -394,6 +428,7 @@ def class_overview() -> dict:
         weak = sum(1 for v in vals if v < config.WEAK)
         la = last.get(s["id"])
         roster.append({**s, "avg_mastery": round(sum(vals) / len(vals), 3) if vals else None, "weak_concepts": weak,
+                       "interests": [i["name"] for i in interests(s["id"])][:4],
                        "last_test": la, "at_risk": bool(vals) and (sum(vals) / len(vals) < 0.55 or weak >= 5)})
     return {"students": roster, "concept_heatmap": heat, "top_gaps": heat[:5],
             "note": "Students marked is_simulated are sample data so the class view is not empty."}
@@ -440,6 +475,8 @@ def student_detail(student_id: int) -> dict:
     stats = style_stats(student_id)
     attempts = db.query("SELECT id, topic_id, score, total, finished_at FROM attempts WHERE user_id=? AND finished_at IS NOT NULL ORDER BY id",
                         (student_id,))
+    requests = db.query("SELECT created_at AS at, request, concept_id, style FROM explanations "
+                        "WHERE user_id=? AND request != '' ORDER BY id DESC LIMIT 8", (student_id,))
 
     data = {
         "name": s["name"], "interest": s["interest"], "age_group": s["age_group"],
@@ -451,13 +488,33 @@ def student_detail(student_id: int) -> dict:
         "mistake_notes": [r["thinking_summary"] for r in rows if not r["correct"]][:8],
         "explanation_styles": stats,
         "tests_taken": len(attempts),
+        "interests": [{"name": i["name"], "from": i["source"], "asked_times": i["times"]} for i in interests(student_id)],
+        "recent_requests": [r["request"] for r in requests],
     }
     last_id = attempts[-1]["id"] if attempts else 0
-    key = f"profile:{student_id}:{last_id}:{len(stats)}:{sum(v['shown'] for v in stats.values())}"
+    key = f"profile:{student_id}:{last_id}:{len(stats)}:{sum(v['shown'] for v in stats.values())}:{len(requests)}:{len(data['interests'])}"
     profile = db.cache_get(key)
     if not profile:
         profile = teacher_insights.student_profile(data).model_dump()
         db.cache_set(key, profile)
     return {"student": s, "attempts": attempts, "concept_map": cmap, "calibration": cal,
+            "interests": interests(student_id),
+            "recent_requests": [{**r, "concept": names.get(r["concept_id"], r["concept_id"])} for r in requests],
             "misconceptions": [{"text": texts.get(m["misconception_id"], ""), "concept": names.get(m["concept_id"], ""), "times": m["times"]} for m in misc],
             "style_stats": stats, "profile": profile}
+
+
+def activity(limit: int = 12) -> list[dict]:
+    """What live students just did: tests finished and what they asked their tutor. Simulated students are left out."""
+    names = {c.id: c.name for c in content.graph().concepts}
+    events = []
+    for r in db.query("SELECT a.finished_at AS at, u.name, a.score, a.total, a.topic_id FROM attempts a JOIN users u ON u.id=a.user_id "
+                      "WHERE a.finished_at IS NOT NULL AND u.is_simulated=0 ORDER BY a.finished_at DESC LIMIT ?", (limit,)):
+        events.append({"type": "test", "at": r["at"], "student": r["name"],
+                       "text": f"Finished the {r['topic_id']} test, {r['score']} of {r['total']}"})
+    for r in db.query("SELECT e.created_at AS at, u.name, e.request, e.concept_id FROM explanations e JOIN users u ON u.id=e.user_id "
+                      "WHERE e.request != '' AND u.is_simulated=0 ORDER BY e.id DESC LIMIT ?", (limit,)):
+        events.append({"type": "request", "at": r["at"], "student": r["name"], "text": r["request"],
+                       "concept": names.get(r["concept_id"], r["concept_id"])})
+    events.sort(key=lambda e: e["at"], reverse=True)
+    return events[:limit]

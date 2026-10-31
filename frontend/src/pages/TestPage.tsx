@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Check, Send } from "lucide-react";
 import { api } from "../api";
 import { ErrorBox } from "../components/ui";
 import { ThinkingPanel } from "../components/ThinkingPanel";
@@ -79,17 +78,16 @@ export default function TestPage() {
   const answered = qs.filter((x) => drafts[x.id]?.chosen && drafts[x.id]?.confidence).length;
 
   return (
-    <div className="mx-auto max-w-[780px]">
+    <div className="mx-auto max-w-[760px]">
       <div className="mb-6">
-        <div className="mb-3 flex items-center justify-between text-sm">
+        <div className="mb-3 flex items-center justify-between">
           <span className="label-eyebrow">Question {i + 1} of {qs.length}</span>
           <span className="text-xs text-faint">{answered} answered</span>
         </div>
         <div className="flex gap-1.5">
           {qs.map((x, k) => (
-            <button key={x.id} onClick={() => setI(k)} aria-label={`Go to question ${k + 1}`}
-              className="h-1.5 flex-1 rounded-full transition-all"
-              style={{ background: k === i ? "#22d3ee" : drafts[x.id]?.chosen && drafts[x.id]?.confidence ? "#2b6f86" : "#1c2740" }} />
+            <button key={x.id} onClick={() => setI(k)} aria-label={`Go to question ${k + 1}`} className="h-1.5 flex-1 rounded-full transition-colors"
+              style={{ background: k === i ? "#4c9aff" : drafts[x.id]?.chosen && drafts[x.id]?.confidence ? "#2d5b94" : "#232c3d" }} />
           ))}
         </div>
       </div>
@@ -98,15 +96,15 @@ export default function TestPage() {
         <div className="mb-3 flex flex-wrap gap-1.5">
           {q.concepts.map((c) => <span key={c.id} className="chip">{c.name}</span>)}
         </div>
-        <h2 className="text-[21px] font-semibold leading-snug tracking-tight">{q.stem}</h2>
+        <h2 className="text-xl font-semibold leading-snug tracking-tight">{q.stem}</h2>
 
-        <div className="mt-6 space-y-2.5" role="radiogroup">
+        <div className="mt-6 space-y-2" role="radiogroup">
           {q.options.map((o, k) => {
             const on = d.chosen === o.key;
             return (
               <button key={o.key} role="radio" aria-checked={on} onClick={() => set({ chosen: o.key })}
-                className={`flex w-full items-center gap-3.5 rounded-xl border px-4 py-3.5 text-left transition ${on ? "border-accent bg-accent/10" : "border-line bg-bg/40 hover:border-[#2b3b5f] hover:bg-raise/60"}`}>
-                <span className={`grid size-7 shrink-0 place-items-center rounded-lg text-[13px] font-bold ${on ? "bg-accent text-[#04101c]" : "bg-raise text-mute"}`}>{o.key}</span>
+                className={`flex w-full items-center gap-3.5 rounded-lg border px-4 py-3 text-left transition ${on ? "border-accent bg-accent/10" : "border-line hover:border-[#34415a] hover:bg-raise"}`}>
+                <span className={`grid size-7 shrink-0 place-items-center rounded-md text-[13px] font-semibold ${on ? "bg-accent text-[#06101f]" : "bg-raise text-mute"}`}>{o.key}</span>
                 <span className="flex-1 text-[15px]">{o.text}</span>
                 <span className="hidden text-[11px] text-faint sm:block">{k + 1}</span>
               </button>
@@ -119,7 +117,7 @@ export default function TestPage() {
           <div className="grid grid-cols-3 gap-2">
             {CONF.map((c) => (
               <button key={c.id} onClick={() => set({ confidence: c.id })}
-                className={`rounded-xl border px-3 py-2.5 text-left transition ${d.confidence === c.id ? "border-accent2 bg-accent2/12" : "border-line bg-bg/40 hover:border-[#2b3b5f]"}`}>
+                className={`rounded-lg border px-3 py-2.5 text-left transition ${d.confidence === c.id ? "border-accent bg-accent/10" : "border-line hover:border-[#34415a]"}`}>
                 <div className="text-[13px] font-semibold">{c.label}</div>
                 <div className="text-[11px] text-faint">{c.hint}</div>
               </button>
@@ -135,18 +133,16 @@ export default function TestPage() {
       {error && <div className="mt-4"><ErrorBox message={error} /></div>}
 
       <div className="mt-5 flex items-center justify-between">
-        <button className="btn btn-ghost" disabled={i === 0} onClick={() => setI(i - 1)}><ArrowLeft size={15} /> Back</button>
+        <button className="btn btn-ghost" disabled={i === 0} onClick={() => setI(i - 1)}>Back</button>
         {last ? (
           <button className="btn btn-primary" disabled={answered < qs.length} onClick={submit} title={answered < qs.length ? "Answer every question first" : ""}>
-            <Send size={15} /> Submit test
+            Submit test
           </button>
         ) : (
-          <button className="btn btn-primary" disabled={!ready} onClick={() => setI(i + 1)}>
-            Next <ArrowRight size={15} />
-          </button>
+          <button className="btn btn-primary" disabled={!ready} onClick={() => setI(i + 1)}>Next</button>
         )}
       </div>
-      {!ready && d.chosen && <p className="mt-3 text-center text-xs text-faint"><Check size={12} className="mr-1 inline" />Choose how sure you are to continue.</p>}
+      {!ready && d.chosen && <p className="mt-3 text-center text-xs text-faint">Choose how sure you are to continue.</p>}
     </div>
   );
 }

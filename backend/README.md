@@ -37,5 +37,5 @@ teacher:      learner-model data -> teacher_insights
 Student: `POST /auth/login`, `GET /subjects`, `POST /attempts`, `POST /attempts/{id}/submit`,
 `GET /attempts/{id}/results | briefing | review`, `POST /explain`, `POST /explanations/{id}/feedback`, `GET /progress`,
 `PATCH /me` (interest, age group).
-Teacher: `GET /teacher/class`, `GET /teacher/class/plans`, `GET /teacher/students/{id}`.
+Teacher: `GET /teacher/class`, `GET /teacher/class/plans`, `GET /teacher/activity` (live feed), `GET /teacher/students/{id}`.
 Open: `GET /concept-graph`, `GET /agents`, `GET /trace`, `GET /health`.

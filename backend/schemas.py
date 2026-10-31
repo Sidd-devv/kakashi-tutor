@@ -120,6 +120,10 @@ class StudentProfile(BaseModel):
     best_explanation_style: str = ""
 
 
+class Interests(BaseModel):
+    interests: list[str] = Field(default_factory=list)
+
+
 class ReteachPlan(BaseModel):
     concept_id: str
     misconception: str = ""

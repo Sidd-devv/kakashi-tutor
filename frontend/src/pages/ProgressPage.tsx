@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import { api } from "../api";
 import ConceptMap from "../components/ConceptMap";
 import { Badge, Bar, ErrorBox, PageHead, Skeleton, useAsync } from "../components/ui";
@@ -60,7 +59,7 @@ export default function ProgressPage() {
             <ul className="space-y-2">{[...d.attempts].reverse().map((a) => (
               <li key={a.id}><button onClick={() => nav(`/results/${a.id}`)} className="flex w-full items-center justify-between rounded-lg bg-raise/60 px-3 py-2.5 text-[13px] hover:bg-raise">
                 <span className="capitalize">{a.topic_id}<span className="ml-2 text-xs text-faint">{dateShort(a.finished_at)}</span></span>
-                <span className="flex items-center gap-2 font-semibold">{a.score}/{a.total}<ArrowRight size={13} className="text-faint" /></span>
+                <span className="flex items-center gap-2 font-semibold">{a.score}/{a.total}</span>
               </button></li>
             ))}</ul>
           )}
@@ -75,7 +74,7 @@ export default function ProgressPage() {
           <div className="label-eyebrow mb-3">Explanations that worked for you</div>
           {styles.length === 0 ? <p className="text-sm text-mute">Review a mistake and tell your tutor what helped. It will learn your style.</p> : (
             <ul className="space-y-3">{styles.map(([k, v]) => (
-              <li key={k}><div className="mb-1 flex justify-between text-[13px]"><span>{STYLE_LABEL[k] ?? k}</span><span className="text-faint">{v.helped}/{v.shown} helped</span></div><Bar value={v.shown ? v.helped / v.shown : 0} color="#818cf8" height={6} /></li>
+              <li key={k}><div className="mb-1 flex justify-between text-[13px]"><span>{STYLE_LABEL[k] ?? k}</span><span className="text-faint">{v.helped}/{v.shown} helped</span></div><Bar value={v.shown ? v.helped / v.shown : 0} color="#4c9aff" height={6} /></li>
             ))}</ul>
           )}
         </div>
