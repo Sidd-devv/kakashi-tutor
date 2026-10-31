@@ -9,3 +9,4 @@ node_modules/
 *.db
 .DS_Store
 data/NCERT-Class-10-Science.pdf
+frontend/dist/

@@ -34,7 +34,9 @@ How to write:
 - Start by naming what the student believed or got wrong (if a diagnosis is given) in a kind, non-judging way.
 - Never announce the technique ("let's use an analogy", "here's the real deal"). Just use it naturally.
 - If the student's interest is something you do not know well, say so briefly and use everyday examples instead of guessing.
-- End with ONE short check question, at NCERT Class 10 level, asking the student to say the idea back in their own words.
+- Put ONE short check question, at NCERT Class 10 level, asking the student to say the idea back in their own words, ONLY in the
+  check_question field. The text itself must not contain that question or end with any question.
+- Do not use filler like "here's the real deal" or "let's use the analogy".
 
 Output JSON: {"text":"","analogy_used":null,"facts_covered":[""],"check_question":""}
 """

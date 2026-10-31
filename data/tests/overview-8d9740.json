@@ -1,0 +1,178 @@
+{
+  "id": "overview-8d9740",
+  "topic_id": "overview",
+  "source": "cached",
+  "questions": [
+    {
+      "id": "overview-8d9740-q1",
+      "concept_ids": [
+        "life_processes_definition"
+      ],
+      "level": "recall",
+      "stem": "What are life processes?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Processes that happen only when an organism is awake.",
+          "misconception_id": "life_processes_only_when_active"
+        },
+        {
+          "key": "B",
+          "text": "Processes that only happen when an organism is moving.",
+          "misconception_id": "life_processes_only_when_active"
+        },
+        {
+          "key": "C",
+          "text": "Processes that occur only during growth periods.",
+          "misconception_id": "life_processes_only_when_active"
+        },
+        {
+          "key": "D",
+          "text": "Processes that perform the maintenance job in living organisms.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "D",
+      "source_section": "5.1",
+      "source_quote": "The processes which together perform this maintenance job are life processes.",
+      "explanation": "The quote defines life processes as those that maintain the organism, making option A correct."
+    },
+    {
+      "id": "overview-8d9740-q2",
+      "concept_ids": [
+        "need_for_energy_and_raw_materials"
+      ],
+      "level": "understanding",
+      "stem": "Why do living organisms need energy from outside their bodies?",
+      "options": [
+        {
+          "key": "A",
+          "text": "To prevent damage and breakdown in their bodies.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "Only to help them move from one place to another.",
+          "misconception_id": "energy_only_for_movement"
+        },
+        {
+          "key": "C",
+          "text": "Only for digestion of food.",
+          "misconception_id": "energy_only_for_movement"
+        },
+        {
+          "key": "D",
+          "text": "Only to keep them awake.",
+          "misconception_id": "energy_only_for_movement"
+        }
+      ],
+      "correct_key": "A",
+      "source_section": "5.1",
+      "source_quote": "Since these maintenance processes are needed to prevent damage and break-down, energy is needed for them.",
+      "explanation": "The quote states that energy is needed to prevent damage and breakdown, supporting option A."
+    },
+    {
+      "id": "overview-8d9740-q3",
+      "concept_ids": [
+        "need_for_energy_and_raw_materials"
+      ],
+      "level": "understanding",
+      "stem": "What additional requirement is there if an organism's body size is to grow?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Growth only requires oxygen.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "No additional requirements are needed for growth.",
+          "misconception_id": "energy_only_for_movement"
+        },
+        {
+          "key": "C",
+          "text": "Additional raw material will also be needed from outside.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "Only more energy is needed, not raw materials.",
+          "misconception_id": "energy_only_for_movement"
+        }
+      ],
+      "correct_key": "C",
+      "source_section": "5.1",
+      "source_quote": "If the body size of the organisms is to grow, additional raw material will also be needed from outside.",
+      "explanation": "The quote directly states that growth requires additional raw material from outside, making A correct."
+    },
+    {
+      "id": "overview-8d9740-q4",
+      "concept_ids": [
+        "life_processes_definition"
+      ],
+      "level": "understanding",
+      "stem": "Do life processes stop when an organism is asleep or sitting still?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Yes, life processes only happen during activity.",
+          "misconception_id": "life_processes_only_when_active"
+        },
+        {
+          "key": "B",
+          "text": "Yes, life processes stop when not moving.",
+          "misconception_id": "life_processes_only_when_active"
+        },
+        {
+          "key": "C",
+          "text": "No, maintenance functions must go on even then.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "No, but only breathing continues.",
+          "misconception_id": "life_processes_only_when_active"
+        }
+      ],
+      "correct_key": "C",
+      "source_section": "5.1",
+      "source_quote": "The maintenance functions of living organisms must go on even when they are not doing anything particular. Even when we are just sitting in class, even if we are just asleep, this maintenance job has to go on.",
+      "explanation": "The quote states that maintenance functions continue even when not active, supporting option A."
+    },
+    {
+      "id": "overview-8d9740-q5",
+      "concept_ids": [
+        "need_for_energy_and_raw_materials"
+      ],
+      "level": "application",
+      "stem": "Why is there a need for a transportation system in multi-cellular organisms?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Because food and oxygen are not needed by all cells.",
+          "misconception_id": "energy_only_for_movement"
+        },
+        {
+          "key": "B",
+          "text": "Because all cells are in direct contact with the environment.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "Because food and oxygen are taken up at one place but all parts need them.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "Because only waste needs to be transported.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "C",
+      "source_section": "5.1",
+      "source_quote": "This situation creates a need for a transportation system for carrying food and oxygen from one place to another in the body.",
+      "explanation": "The quote explains that transportation is needed because uptake happens at one place but all parts need food and oxygen."
+    }
+  ],
+  "rejected_by_validator": []
+}
