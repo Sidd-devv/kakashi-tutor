@@ -1,0 +1,178 @@
+{
+  "id": "nutrition-0be724",
+  "topic_id": "nutrition",
+  "source": "cached",
+  "questions": [
+    {
+      "id": "nutrition-0be724-q1",
+      "concept_ids": [
+        "nutrition_overview"
+      ],
+      "level": "recall",
+      "stem": "Which statement best describes why living organisms need food?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Food provides both energy and materials needed for growth and maintenance.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "Food is only required when organisms are active.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "Food is not necessary if an organism is not growing.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "Food is only needed to provide energy for activities.",
+          "misconception_id": "nutrition_only_for_energy"
+        }
+      ],
+      "correct_key": "A",
+      "source_section": "5.2",
+      "source_quote": "We also need materials from outside in order to grow, develop, synthesise protein and other substances needed in the body. This source of energy and materials is the food we eat.",
+      "explanation": "The quote shows that food provides both energy and materials, not just energy."
+    },
+    {
+      "id": "nutrition-0be724-q2",
+      "concept_ids": [
+        "autotrophic_nutrition"
+      ],
+      "level": "understanding",
+      "stem": "What do autotrophs require from outside to perform photosynthesis?",
+      "options": [
+        {
+          "key": "A",
+          "text": "Carbon dioxide and water",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "No materials from outside",
+          "misconception_id": "autotrophs_do_not_need_raw_materials"
+        },
+        {
+          "key": "C",
+          "text": "Only sunlight",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "Only oxygen and water",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "A",
+      "source_section": "5.2.1",
+      "source_quote": "This material is taken in the form of carbon dioxide and water which is converted into carbohydrates in the presence of sunlight and chlorophyll.",
+      "explanation": "The quote states that autotrophs take in carbon dioxide and water from outside for photosynthesis."
+    },
+    {
+      "id": "nutrition-0be724-q3",
+      "concept_ids": [
+        "role_of_chlorophyll_and_stomata"
+      ],
+      "level": "understanding",
+      "stem": "What is the function of stomata in leaves during photosynthesis?",
+      "options": [
+        {
+          "key": "A",
+          "text": "They absorb sunlight for the plant.",
+          "misconception_id": null
+        },
+        {
+          "key": "B",
+          "text": "They store chlorophyll for the plant.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "They are always open to let water escape.",
+          "misconception_id": "stomata_always_open"
+        },
+        {
+          "key": "D",
+          "text": "They allow exchange of gases needed for photosynthesis.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "D",
+      "source_section": "5.2.1",
+      "source_quote": "Massive amounts of gaseous exchange takes place in the leaves through these pores for the purpose of photosynthesis.",
+      "explanation": "The quote explains that stomata are involved in gas exchange for photosynthesis."
+    },
+    {
+      "id": "nutrition-0be724-q4",
+      "concept_ids": [
+        "digestion_in_mouth"
+      ],
+      "level": "understanding",
+      "stem": "What is the role of saliva in the digestion of food in the mouth?",
+      "options": [
+        {
+          "key": "A",
+          "text": "It only wets the food and does not help in digestion.",
+          "misconception_id": "saliva_only_wets_food"
+        },
+        {
+          "key": "B",
+          "text": "It contains an enzyme that breaks down starch into simple sugar.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "It absorbs nutrients directly into the blood.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "It digests proteins into amino acids.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "B",
+      "source_section": "5.2.4",
+      "source_quote": "The saliva contains an enzyme called salivary amylase that breaks down starch which is a complex molecule to give simple sugar.",
+      "explanation": "The quote shows that saliva helps digest starch, not just wet food."
+    },
+    {
+      "id": "nutrition-0be724-q5",
+      "concept_ids": [
+        "digestion_and_absorption_in_small_intestine"
+      ],
+      "level": "understanding",
+      "stem": "What is the main function of villi in the small intestine?",
+      "options": [
+        {
+          "key": "A",
+          "text": "They absorb nutrients mainly in the stomach.",
+          "misconception_id": "absorption_in_stomach"
+        },
+        {
+          "key": "B",
+          "text": "They are where most protein digestion occurs.",
+          "misconception_id": null
+        },
+        {
+          "key": "C",
+          "text": "They secrete acid to digest food.",
+          "misconception_id": null
+        },
+        {
+          "key": "D",
+          "text": "They increase the surface area for absorption of digested food.",
+          "misconception_id": null
+        }
+      ],
+      "correct_key": "D",
+      "source_section": "5.2.4",
+      "source_quote": "The inner lining of the small intestine has numerous finger-like projections called villi which increase the surface area for absorption.",
+      "explanation": "The quote states that villi increase surface area for absorption in the small intestine."
+    }
+  ],
+  "rejected_by_validator": []
+}

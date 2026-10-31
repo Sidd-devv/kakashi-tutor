@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+.next/
+*.db
+.DS_Store
+data/NCERT-Class-10-Science.pdf

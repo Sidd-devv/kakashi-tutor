@@ -1,0 +1,967 @@
+{
+  "book": "NCERT Class 10 Science",
+  "chapter": "5. Life Processes",
+  "concepts": [
+    {
+      "id": "life_processes_definition",
+      "name": "Definition of Life Processes",
+      "section_id": "5.1",
+      "pages": [
+        80
+      ],
+      "summary": "Life processes are the maintenance functions that keep living organisms alive, even when they are not active.",
+      "prerequisites": [],
+      "must_stay_true": [
+        {
+          "fact": "Life processes are necessary for maintenance and prevention of damage and breakdown in organisms.",
+          "source_quote": "The processes which together perform this maintenance job are life processes."
+        },
+        {
+          "fact": "Energy for life processes comes from outside the body, usually as food.",
+          "source_quote": "This energy comes from outside the body of the individual organism. So there must be a process to transfer a source of energy from outside the body of the organism, which we call food, to the inside, a process we commonly call nutrition."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "life_processes_only_when_active",
+          "text": "Life processes only happen when an organism is active.",
+          "why_students_think_it": "Students may associate life processes with visible activity, not realizing maintenance occurs at all times."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "need_for_energy_and_raw_materials",
+      "name": "Need for Energy and Raw Materials",
+      "section_id": "5.1",
+      "pages": [
+        80
+      ],
+      "summary": "Organisms require energy and raw materials from outside to maintain life and grow.",
+      "prerequisites": [
+        "life_processes_definition"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Energy is needed to prevent damage and breakdown in organisms.",
+          "source_quote": "Since these maintenance processes are needed to prevent damage and break-down, energy is needed for them."
+        },
+        {
+          "fact": "Growth requires additional raw materials from outside the body.",
+          "source_quote": "If the body size of the organisms is to grow, additional raw material will also be needed from outside."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "energy_only_for_movement",
+          "text": "Energy is only needed when the organism is moving.",
+          "why_students_think_it": "Students often link energy use to visible actions, not maintenance."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "nutrition_overview",
+      "name": "Overview of Nutrition",
+      "section_id": "5.2",
+      "pages": [
+        81
+      ],
+      "summary": "Nutrition is the process by which organisms obtain energy and materials from food.",
+      "prerequisites": [
+        "need_for_energy_and_raw_materials"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Food provides both energy and materials for growth and maintenance.",
+          "source_quote": "This source of energy and materials is the food we eat."
+        },
+        {
+          "fact": "All organisms require energy and materials, but obtain them in different ways.",
+          "source_quote": "The general requirement for energy and materials is common in all organisms, but it is fulfilled in different ways."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "nutrition_only_for_energy",
+          "text": "Nutrition is only for getting energy, not materials.",
+          "why_students_think_it": "Students may overlook the need for raw materials for growth and repair."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "autotrophic_nutrition",
+      "name": "Autotrophic Nutrition",
+      "section_id": "5.2.1",
+      "pages": [
+        81
+      ],
+      "summary": "Autotrophic nutrition is when organisms make their own food from simple substances like CO2 and water using sunlight.",
+      "prerequisites": [
+        "nutrition_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Autotrophs convert carbon dioxide and water into carbohydrates using sunlight and chlorophyll.",
+          "source_quote": "This material is taken in the form of carbon dioxide and water which is converted into carbohydrates in the presence of sunlight and chlorophyll."
+        },
+        {
+          "fact": "Photosynthesis is the process by which autotrophs meet their carbon and energy requirements.",
+          "source_quote": "Carbon and energy requirements of the autotrophic organism are fulfilled by photosynthesis."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "autotrophs_do_not_need_raw_materials",
+          "text": "Autotrophs do not need any materials from outside.",
+          "why_students_think_it": "Students may think making food means no need for external substances."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "events_in_photosynthesis",
+      "name": "Events in Photosynthesis",
+      "section_id": "5.2.1",
+      "pages": [
+        82
+      ],
+      "summary": "Photosynthesis involves absorption of light, conversion to chemical energy, splitting of water, and reduction of CO2 to carbohydrates.",
+      "prerequisites": [
+        "autotrophic_nutrition"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Desert plants may take up CO2 at night and use it during the day.",
+          "source_quote": "For example, desert plants take up carbon dioxide at night and prepare an intermediate which is acted upon by the energy absorbed by the chlorophyll during the day."
+        },
+        {
+          "fact": "Photosynthesis happens in three events: chlorophyll absorbs light energy; light energy is converted to chemical energy and water is split; carbon dioxide is reduced to carbohydrates.",
+          "source_quote": "(i) Absorption of light energy by chlorophyll. (ii) Conversion of light energy to chemical energy and splitting of water molecules into hydrogen and oxygen. (iii) Reduction of carbon dioxide to carbohydrates."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "photosynthesis_one_step",
+          "text": "Photosynthesis is a single-step process.",
+          "why_students_think_it": "Students may not realize the process involves multiple stages."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "role_of_chlorophyll_and_stomata",
+      "name": "Role of Chlorophyll and Stomata in Photosynthesis",
+      "section_id": "5.2.1",
+      "pages": [
+        82,
+        83
+      ],
+      "summary": "Chlorophyll is essential for photosynthesis, and stomata regulate gas exchange in leaves.",
+      "prerequisites": [
+        "events_in_photosynthesis"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Chlorophyll is found in chloroplasts and is essential for photosynthesis.",
+          "source_quote": "These green dots are cell organelles called chloroplasts which contain chlorophyll."
+        },
+        {
+          "fact": "Stomata are tiny pores on leaves that allow gas exchange for photosynthesis.",
+          "source_quote": "Massive amounts of gaseous exchange takes place in the leaves through these pores for the purpose of photosynthesis."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "all_cells_have_chlorophyll",
+          "text": "All plant cells have chlorophyll.",
+          "why_students_think_it": "Students may generalize from leaves to all plant tissues."
+        },
+        {
+          "id": "stomata_always_open",
+          "text": "Stomata are always open.",
+          "why_students_think_it": "Students may not know about guard cell regulation."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "other_raw_materials_for_plants",
+      "name": "Other Raw Materials for Plants",
+      "section_id": "5.2.1",
+      "pages": [
+        83
+      ],
+      "summary": "Plants need water and minerals like nitrogen, phosphorus, iron, and magnesium from the soil for growth.",
+      "prerequisites": [
+        "role_of_chlorophyll_and_stomata"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Water used in photosynthesis is taken up from the soil by roots.",
+          "source_quote": "Water used in photosynthesis is taken up from the soil by the roots in terrestrial plants."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "plants_only_need_co2_and_water",
+          "text": "Plants only need carbon dioxide and water to grow.",
+          "why_students_think_it": "Students may overlook the need for minerals."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "heterotrophic_nutrition",
+      "name": "Heterotrophic Nutrition",
+      "section_id": "5.2.2",
+      "pages": [
+        84
+      ],
+      "summary": "Heterotrophic organisms obtain food by consuming other organisms or organic matter.",
+      "prerequisites": [
+        "nutrition_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "The form of nutrition depends on the type and availability of food and on how the organism obtains it.",
+          "source_quote": "The form of nutrition differs depending on the type and availability of food material as well as how it is obtained by the organism."
+        },
+        {
+          "fact": "Some organisms break down food outside the body and then absorb it.",
+          "source_quote": "Some organisms break-down the food material outside the body and then absorb it."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "heterotrophs_make_their_own_food",
+          "text": "Heterotrophs can make their own food.",
+          "why_students_think_it": "Students may confuse heterotrophs with autotrophs."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "types_of_heterotrophic_nutrition",
+      "name": "Types of Heterotrophic Nutrition",
+      "section_id": "5.2.2",
+      "pages": [
+        84
+      ],
+      "summary": "Heterotrophic nutrition includes saprophytic, holozoic, and parasitic strategies.",
+      "prerequisites": [
+        "heterotrophic_nutrition"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Some organisms break down food outside the body and absorb it (saprophytes).",
+          "source_quote": "Some organisms break-down the food material outside the body and then absorb it. Examples are fungi like bread moulds, yeast and mushrooms."
+        },
+        {
+          "fact": "Parasitic organisms derive nutrition from plants or animals without killing them.",
+          "source_quote": "This parasitic nutritive strategy is used by a wide variety of organisms like cuscuta (amar-bel), ticks, lice, leeches and tape-worms."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "all_heterotrophs_eat_plants",
+          "text": "All heterotrophs eat plants.",
+          "why_students_think_it": "Students may not recognize animal and fungal heterotrophs."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "nutrition_in_unicellular_organisms",
+      "name": "Nutrition in Unicellular Organisms",
+      "section_id": "5.2.3",
+      "pages": [
+        84
+      ],
+      "summary": "Unicellular organisms take in food through their surface or specialized structures and digest it internally.",
+      "prerequisites": [
+        "types_of_heterotrophic_nutrition"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Amoeba takes in food using temporary finger-like extensions forming a food-vacuole.",
+          "source_quote": "Amoeba takes in food using temporary finger-like extensions of the cell surface which fuse over the food particle forming a food-vacuole."
+        },
+        {
+          "fact": "Paramoecium takes in food at a specific spot moved by cilia.",
+          "source_quote": "In Paramoecium, which is also a unicellular organism, the cell has a definite shape and food is taken in at a specific spot. Food is moved to this spot by the movement of cilia which cover the entire surface of the cell."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "unicellular_no_digestion",
+          "text": "Unicellular organisms do not digest food.",
+          "why_students_think_it": "Students may think digestion only happens in complex animals."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "nutrition_in_humans_overview",
+      "name": "Overview of Nutrition in Humans",
+      "section_id": "5.2.4",
+      "pages": [
+        84
+      ],
+      "summary": "The human digestive system is a specialized tube with regions for different digestive functions.",
+      "prerequisites": [
+        "types_of_heterotrophic_nutrition"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "The alimentary canal is a long tube from mouth to anus.",
+          "source_quote": "The alimentary canal is basically a long tube extending from the mouth to the anus."
+        },
+        {
+          "fact": "Different regions of the canal are specialized for different functions.",
+          "source_quote": "Various regions are specialised to perform different functions."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "digestion_same_everywhere",
+          "text": "Digestion happens the same way in every part of the digestive tract.",
+          "why_students_think_it": "Students may not realize the specialization of regions."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "digestion_in_mouth",
+      "name": "Digestion in the Mouth",
+      "section_id": "5.2.4",
+      "pages": [
+        85
+      ],
+      "summary": "Digestion in the mouth involves mechanical breakdown by teeth and chemical breakdown by saliva.",
+      "prerequisites": [
+        "nutrition_in_humans_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Saliva contains salivary amylase that breaks down starch to simple sugar.",
+          "source_quote": "The saliva contains an enzyme called salivary amylase that breaks down starch which is a complex molecule to give simple sugar."
+        },
+        {
+          "fact": "Food is crushed by teeth and wetted by saliva for smooth passage.",
+          "source_quote": "This is achieved by crushing the food with our teeth. Since the lining of the canal is soft, the food is also wetted to make its passage smooth."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "saliva_only_wets_food",
+          "text": "Saliva only wets the food and does not help in digestion.",
+          "why_students_think_it": "Students may not know about enzymes in saliva."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "digestion_in_stomach",
+      "name": "Digestion in the Stomach",
+      "section_id": "5.2.4",
+      "pages": [
+        85
+      ],
+      "summary": "The stomach mixes food with gastric juices containing acid, pepsin, and mucus for protein digestion.",
+      "prerequisites": [
+        "digestion_in_mouth"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Gastric glands release hydrochloric acid, pepsin, and mucus.",
+          "source_quote": "The digestion in stomach is taken care of by the gastric glands present in the wall of the stomach. These release hydrochloric acid, a protein digesting enzyme called pepsin, and mucus."
+        },
+        {
+          "fact": "Hydrochloric acid creates an acidic medium for pepsin action.",
+          "source_quote": "The hydrochloric acid creates an acidic medium which facilitates the action of the enzyme pepsin."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "acid_digests_food",
+          "text": "The acid in the stomach digests food by itself.",
+          "why_students_think_it": "Students may not realize the role of enzymes."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "digestion_and_absorption_in_small_intestine",
+      "name": "Digestion and Absorption in Small Intestine",
+      "section_id": "5.2.4",
+      "pages": [
+        86
+      ],
+      "summary": "The small intestine completes digestion with help from liver and pancreas, and absorbs nutrients through villi.",
+      "prerequisites": [
+        "digestion_in_stomach"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Pancreatic juice contains enzymes for digesting proteins and fats.",
+          "source_quote": "The pancreas secretes pancreatic juice which contains enzymes like trypsin for digesting proteins and lipase for breaking down emulsified fats."
+        },
+        {
+          "fact": "Villi in the small intestine increase surface area for absorption.",
+          "source_quote": "The inner lining of the small intestine has numerous finger-like projections called villi which increase the surface area for absorption."
+        },
+        {
+          "fact": "Food from the stomach is acidic, so it is made alkaline (by bile juice from the liver) for the pancreatic enzymes to act.",
+          "source_quote": "The food coming from the stomach is acidic and has to be made alkaline for the pancreatic enzymes to act. Bile juice from the liver accomplishes this in addition to acting on fats."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "absorption_in_stomach",
+          "text": "Absorption of nutrients happens mainly in the stomach.",
+          "why_students_think_it": "Students may not know the role of the small intestine."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "respiration_overview",
+      "name": "Overview of Respiration",
+      "section_id": "5.3",
+      "pages": [
+        87
+      ],
+      "summary": "Respiration is the process by which cells break down food to release energy, using oxygen or not.",
+      "prerequisites": [
+        "nutrition_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Respiration provides energy for cellular activities.",
+          "source_quote": "The food material taken in during the process of nutrition is used in cells to provide energy for various life processes."
+        },
+        {
+          "fact": "Respiration can be aerobic (with oxygen) or anaerobic (without oxygen).",
+          "source_quote": "Some use oxygen to break-down glucose completely into carbon dioxide and water, some use other pathways that do not involve oxygen (Fig. 5.8)."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "respiration_only_in_lungs",
+          "text": "Respiration only happens in the lungs.",
+          "why_students_think_it": "Students may confuse breathing with cellular respiration."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "aerobic_and_anaerobic_respiration",
+      "name": "Aerobic and Anaerobic Respiration",
+      "section_id": "5.3",
+      "pages": [
+        88
+      ],
+      "summary": "Aerobic respiration uses oxygen and releases more energy; anaerobic respiration does not use oxygen and releases less energy.",
+      "prerequisites": [
+        "respiration_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Aerobic respiration releases more energy than anaerobic.",
+          "source_quote": "The release of energy in this aerobic process is a lot greater than in the anaerobic process."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "anaerobic_respiration_no_energy",
+          "text": "Anaerobic respiration does not release any energy.",
+          "why_students_think_it": "Students may think oxygen is essential for energy release."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "atp_energy_currency",
+      "name": "ATP as Energy Currency",
+      "section_id": "5.3",
+      "pages": [
+        88
+      ],
+      "summary": "ATP stores and supplies energy for cellular processes, produced during respiration.",
+      "prerequisites": [
+        "aerobic_and_anaerobic_respiration"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "ATP is synthesized during respiration and used for cellular activities.",
+          "source_quote": "The energy released during cellular respiration is immediately used to synthesise a molecule called ATP which is used to fuel all other activities in the cell."
+        },
+        {
+          "fact": "Breaking the terminal phosphate in ATP releases energy.",
+          "source_quote": "When the terminal phosphate linkage in ATP is broken using water, the energy equivalent to 30.5 kJ/mol is released."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "atp_stores_energy_forever",
+          "text": "ATP stores energy permanently in the cell.",
+          "why_students_think_it": "Students may not realize ATP is constantly made and used."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "gaseous_exchange_in_plants",
+      "name": "Gaseous Exchange in Plants",
+      "section_id": "5.3",
+      "pages": [
+        88,
+        89
+      ],
+      "summary": "Plants exchange gases through stomata and intercellular spaces by diffusion.",
+      "prerequisites": [
+        "role_of_chlorophyll_and_stomata"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Plants exchange oxygen and carbon dioxide by diffusion through stomata.",
+          "source_quote": "We have seen that plants exchange gases through stomata, and the large inter-cellular spaces ensure that all cells are in contact with air."
+        },
+        {
+          "fact": "The direction of diffusion depends on environmental conditions and plant needs.",
+          "source_quote": "The direction of diffusion depends upon the environmental conditions and the requirements of the plant."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "plants_only_release_oxygen",
+          "text": "Plants only release oxygen, not carbon dioxide.",
+          "why_students_think_it": "Students may not know about respiration in plants."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "respiratory_system_in_humans",
+      "name": "Respiratory System in Humans",
+      "section_id": "5.3",
+      "pages": [
+        89,
+        90
+      ],
+      "summary": "The human respiratory system includes nostrils, trachea, lungs, and alveoli for gas exchange.",
+      "prerequisites": [
+        "respiration_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Air is filtered by hairs and mucus in the nostrils.",
+          "source_quote": "The air passing through the nostrils is filtered by fine hairs that line the passage. The passage is also lined with mucus which helps in this process."
+        },
+        {
+          "fact": "Alveoli provide a surface for exchange of gases with blood.",
+          "source_quote": "The alveoli provide a surface where the exchange of gases can take place. The walls of the alveoli contain an extensive network of blood-vessels."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "lungs_filled_and_emptied_completely",
+          "text": "Lungs are completely filled and emptied with each breath.",
+          "why_students_think_it": "Students may not know about residual air volume."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "role_of_haemoglobin",
+      "name": "Role of Haemoglobin in Oxygen Transport",
+      "section_id": "5.3",
+      "pages": [
+        90
+      ],
+      "summary": "Haemoglobin in red blood cells binds oxygen for transport to tissues.",
+      "prerequisites": [
+        "respiratory_system_in_humans"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Haemoglobin has a high affinity for oxygen.",
+          "source_quote": "In human beings, the respiratory pigment is haemoglobin which has a very high affinity for oxygen."
+        },
+        {
+          "fact": "Haemoglobin is present in red blood corpuscles.",
+          "source_quote": "This pigment is present in the red blood corpuscles."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "oxygen_dissolved_in_blood",
+          "text": "Oxygen is mainly transported dissolved in blood plasma.",
+          "why_students_think_it": "Students may not know the role of haemoglobin."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "transportation_in_humans_overview",
+      "name": "Overview of Transportation in Humans",
+      "section_id": "5.4.1",
+      "pages": [
+        91
+      ],
+      "summary": "Blood transports food, gases, and wastes; the heart pumps blood through vessels.",
+      "prerequisites": [
+        "role_of_haemoglobin"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Blood consists of plasma and cells, and transports food, gases, and wastes.",
+          "source_quote": "Blood consists of a fluid medium called plasma in which the cells are suspended. Plasma transports food, carbon dioxide and nitrogenous wastes in dissolved form."
+        },
+        {
+          "fact": "A pumping organ (the heart) is needed to push blood around the body.",
+          "source_quote": "We thus need a pumping organ to push blood around the body, a network of tubes to reach all the tissues"
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "blood_only_carries_oxygen",
+          "text": "Blood only carries oxygen.",
+          "why_students_think_it": "Students may not know about other transported substances."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "double_circulation",
+      "name": "Double Circulation in Humans",
+      "section_id": "5.4.1",
+      "pages": [
+        92
+      ],
+      "summary": "In humans, blood passes through the heart twice in each cycle, separating oxygenated and deoxygenated blood.",
+      "prerequisites": [
+        "transportation_in_humans_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Double circulation keeps oxygenated and deoxygenated blood separate.",
+          "source_quote": "The separation of the right side and the left side of the heart is useful to keep oxygenated and de- oxygenated blood from mixing."
+        },
+        {
+          "fact": "Blood goes through the heart twice during each cycle in humans.",
+          "source_quote": "On the other hand, it goes through the heart twice during each cycle in other vertebrates. This is known as double circulation."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "blood_mixes_in_heart",
+          "text": "Oxygenated and deoxygenated blood mix in the human heart.",
+          "why_students_think_it": "Students may not understand the chamber separation."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "blood_vessels_and_lymph",
+      "name": "Blood Vessels and Lymph",
+      "section_id": "5.4.1",
+      "pages": [
+        93,
+        94
+      ],
+      "summary": "Arteries, veins, and capillaries transport blood; lymph drains excess fluid and carries fats.",
+      "prerequisites": [
+        "transportation_in_humans_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Arteries carry blood away from the heart under high pressure.",
+          "source_quote": "Arteries are the vessels which carry blood away from the heart to various organs of the body. Since the blood emerges from the heart under high pressure, the arteries have thick, elastic walls."
+        },
+        {
+          "fact": "Lymph carries digested and absorbed fat from intestine and drains excess fluid.",
+          "source_quote": "Lymph carries digested and absorbed fat from intestine and drains excess fluid from extra cellular space back into the blood."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "veins_high_pressure",
+          "text": "Veins carry blood under high pressure.",
+          "why_students_think_it": "Students may not know the difference between arteries and veins."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "transportation_in_plants_overview",
+      "name": "Overview of Transportation in Plants",
+      "section_id": "5.4.2",
+      "pages": [
+        94
+      ],
+      "summary": "Plants transport water, minerals, and food using xylem and phloem.",
+      "prerequisites": [
+        "other_raw_materials_for_plants"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Xylem moves water and minerals from roots to leaves.",
+          "source_quote": "One, the xylem moves water and minerals obtained from the soil."
+        },
+        {
+          "fact": "Phloem transports products of photosynthesis to other parts.",
+          "source_quote": "The other, phloem transports products of photosynthesis from the leaves where they are synthesised to other parts of the plant."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "xylem_and_phloem_do_same_job",
+          "text": "Xylem and phloem transport the same substances.",
+          "why_students_think_it": "Students may not distinguish between the two."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "transpiration_and_water_transport",
+      "name": "Transpiration and Water Transport in Plants",
+      "section_id": "5.4.2",
+      "pages": [
+        95
+      ],
+      "summary": "Transpiration helps pull water upward from roots to leaves and regulates temperature.",
+      "prerequisites": [
+        "transportation_in_plants_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Transpiration is the loss of water vapour from aerial parts of the plant.",
+          "source_quote": "The loss of water in the form of vapour from the aerial parts of the plant is known as transpiration."
+        },
+        {
+          "fact": "Transpiration creates a suction that pulls water from the roots.",
+          "source_quote": "In fact, evaporation of water molecules from the cells of a leaf creates a suction which pulls water from the xylem cells of roots."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "transpiration_is_wasteful",
+          "text": "Transpiration is a wasteful process for plants.",
+          "why_students_think_it": "Students may not know its role in water movement and cooling."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "translocation_in_phloem",
+      "name": "Translocation in Phloem",
+      "section_id": "5.4.2",
+      "pages": [
+        95
+      ],
+      "summary": "Phloem transports soluble products of photosynthesis and other substances using energy.",
+      "prerequisites": [
+        "transportation_in_plants_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Phloem can move materials in both upward and downward directions.",
+          "source_quote": "The translocation of food and other substances takes place in the sieve tubes with the help of adjacent companion cells both in upward and downward directions."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "phloem_only_moves_down",
+          "text": "Phloem only moves food downward.",
+          "why_students_think_it": "Students may not know about bidirectional movement."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "excretion_overview",
+      "name": "Overview of Excretion",
+      "section_id": "5.5",
+      "pages": [
+        96
+      ],
+      "summary": "Excretion is the removal of harmful metabolic wastes from the body.",
+      "prerequisites": [],
+      "must_stay_true": [
+        {
+          "fact": "Excretion removes nitrogenous and other metabolic wastes.",
+          "source_quote": "The biological process involved in the removal of these harmful metabolic wastes from the body is called excretion."
+        },
+        {
+          "fact": "Unicellular organisms may remove wastes by simple diffusion.",
+          "source_quote": "Many unicellular organisms remove these wastes by simple diffusion from the body surface into the surrounding water."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "excretion_only_urine",
+          "text": "Excretion only refers to passing urine.",
+          "why_students_think_it": "Students may not know about other waste products."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "excretion_in_humans",
+      "name": "Excretion in Human Beings",
+      "section_id": "5.5.1",
+      "pages": [
+        96
+      ],
+      "summary": "The human excretory system filters blood in kidneys, forming urine that is stored and released from the bladder.",
+      "prerequisites": [
+        "excretion_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Kidneys filter blood to remove nitrogenous wastes.",
+          "source_quote": "Just as CO2 is removed from the blood in the lungs, nitrogenous waste such as urea or uric acid are removed from blood in the kidneys."
+        },
+        {
+          "fact": "The human excretory system has a pair of kidneys, a pair of ureters, a urinary bladder and a urethra.",
+          "source_quote": "The excretory system of human beings (Fig. 5.13) includes a pair of kidneys, a pair of ureters, a urinary bladder and a urethra."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "urine_is_undigested_food",
+          "text": "Urine is made from undigested food.",
+          "why_students_think_it": "Students may confuse excretion with egestion."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "excretion_in_plants",
+      "name": "Excretion in Plants",
+      "section_id": "5.5.2",
+      "pages": [
+        98
+      ],
+      "summary": "Plants excrete wastes by storing them in vacuoles, leaves, or excreting into soil.",
+      "prerequisites": [
+        "excretion_overview"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "Plants can store waste in vacuoles or leaves that fall off.",
+          "source_quote": "Many plant waste products are stored in cellular vacuoles. Waste products may be stored in leaves that fall off."
+        },
+        {
+          "fact": "Plants can excrete some waste substances into the soil.",
+          "source_quote": "Plants also excrete some waste substances into the soil around them."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "plants_do_not_excrete",
+          "text": "Plants do not excrete wastes.",
+          "why_students_think_it": "Students may not see visible excretion in plants."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "nephron_and_urine_formation",
+      "name": "Nephron and Urine Formation",
+      "section_id": "5.5.1",
+      "pages": [
+        97
+      ],
+      "summary": "Each kidney filters blood in many tiny units called nephrons; useful substances are taken back as the urine flows on.",
+      "prerequisites": [
+        "excretion_in_humans"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "The kidney's filtration units are nephrons: a cluster of thin-walled blood capillaries joined to the cup-shaped Bowman's capsule, which collects the filtrate.",
+          "source_quote": "Each capillary cluster in the kidney is associated with the cup-shaped end of a coiled tube called Bowman’s capsule that collects the filtrate (Fig. 5.14). Each kidney has large numbers of these filtration units called nephrons packed close together."
+        },
+        {
+          "fact": "Glucose, amino acids, salts and much of the water in the first filtrate are selectively re-absorbed as urine flows along the tube.",
+          "source_quote": "Some substances in the initial filtrate, such as glucose, amino acids, salts and a major amount of water, are selectively re-absorbed as the urine flows along the tube."
+        },
+        {
+          "fact": "About 180 L of filtrate forms daily but only a litre or two is excreted, because the rest is re-absorbed.",
+          "source_quote": "However, the volume actually excreted is only a litre or two a day, because the remaining filtrate is re-absorbed in the kidney tubules."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "all_filtrate_becomes_urine",
+          "text": "Everything the kidney filters out of the blood leaves the body as urine.",
+          "why_students_think_it": "They forget that useful substances and most of the water are taken back (re-absorbed)."
+        }
+      ],
+      "level": "understanding"
+    },
+    {
+      "id": "urine_storage_and_regulation",
+      "name": "Urine Storage and Regulation",
+      "section_id": "5.5.1",
+      "pages": [
+        97
+      ],
+      "summary": "Urine passes from the kidneys through the ureters to the bladder, is stored, and is released through the urethra; the water re-absorbed depends on the body's needs.",
+      "prerequisites": [
+        "nephron_and_urine_formation"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "The amount of water re-absorbed depends on how much excess water is in the body and how much dissolved waste has to be excreted.",
+          "source_quote": "The amount of water re-absorbed depends on how much excess water there is in the body, and on how much of dissolved waste there is to be excreted."
+        },
+        {
+          "fact": "Urine is stored in the urinary bladder until the pressure of the expanded bladder gives the urge to pass it out through the urethra.",
+          "source_quote": "Urine is stored in the urinary bladder until the pressure of the expanded bladder leads to the urge to pass it out through the urethra."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "urine_amount_fixed",
+          "text": "The kidneys make the same amount of urine whatever the body needs.",
+          "why_students_think_it": "They do not link urine volume to how much water the body has to spare."
+        }
+      ],
+      "level": "recall"
+    },
+    {
+      "id": "artificial_kidney",
+      "name": "Artificial Kidney (Dialysis)",
+      "section_id": "5.5.1",
+      "pages": [
+        97
+      ],
+      "summary": "When kidneys fail, a dialysis machine removes nitrogenous waste from the blood, but without re-absorption.",
+      "prerequisites": [
+        "nephron_and_urine_formation"
+      ],
+      "must_stay_true": [
+        {
+          "fact": "An artificial kidney is a device that removes nitrogenous waste products from the blood through dialysis.",
+          "source_quote": "An artificial kidney is a device to remove nitrogenous waste products from the blood through dialysis."
+        },
+        {
+          "fact": "Dialysis is similar to the kidney's function but has no re-absorption.",
+          "source_quote": "This is similar to the function of the kidney, but it is different since there is no re- absorption involved."
+        }
+      ],
+      "misconceptions": [
+        {
+          "id": "dialysis_same_as_kidney",
+          "text": "An artificial kidney works in exactly the same way as a real kidney.",
+          "why_students_think_it": "They miss that dialysis has no re-absorption step."
+        }
+      ],
+      "level": "recall"
+    }
+  ]
+}

@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kakashi Tutor - Technical Document</title>
+<style>
+:root{
+  --bg:#0b1020; --panel:#121a33; --panel2:#18224a; --line:#26335f;
+  --text:#e8ecff; --muted:#9aa6d6; --accent:#4cc9ff; --accent2:#7c6cff;
+  --good:#3ddc97; --warn:#ffb84d; --bad:#ff5d7a;
+}
+@media (prefers-color-scheme: light){
+  :root{ --bg:#f5f7ff; --panel:#ffffff; --panel2:#eef1ff; --line:#d5dbf5;
+    --text:#161d3a; --muted:#56608a; --accent:#0a7fb8; --accent2:#5b4bd6;
+    --good:#13a46b; --warn:#c77a00; --bad:#d6334f; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--accent)}
+.layout{display:flex;min-height:100vh}
+nav{position:sticky;top:0;align-self:flex-start;height:100vh;width:260px;flex:none;padding:24px 18px;border-right:1px solid var(--line);background:var(--panel);overflow:auto}
+nav h1{font-size:15px;margin:0 0 4px;letter-spacing:.3px}
+nav small{color:var(--muted);display:block;margin-bottom:18px}
+nav a{display:block;padding:7px 10px;margin:2px 0;border-radius:8px;color:var(--muted);text-decoration:none;font-size:14px}
+nav a:hover,nav a.active{background:var(--panel2);color:var(--text)}
+nav button{margin-top:16px;width:100%;padding:10px;border-radius:10px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;font-size:14px}
+nav button:hover{background:var(--accent);color:#04101f}
+main{flex:1;min-width:0;max-width:980px;margin:0 auto;padding:36px 28px 80px}
+header.hero{padding:28px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,var(--panel),var(--panel2));margin-bottom:28px}
+.hero h2{margin:0 0 8px;font-size:30px;line-height:1.2}
+.hero p{margin:6px 0;color:var(--muted)}
+.tags span{display:inline-block;margin:10px 8px 0 0;padding:4px 12px;border-radius:99px;border:1px solid var(--line);font-size:13px;color:var(--muted)}
+section{margin:44px 0;scroll-margin-top:20px}
+section>h2{font-size:24px;margin:0 0 6px;display:flex;gap:10px;align-items:center}
+section>h2 .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--accent2);color:#fff;font-size:14px}
+.lead{color:var(--muted);margin:0 0 16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:12px 0}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid .card{margin:0}
+h3{margin:0 0 6px;font-size:17px}
+ul{margin:6px 0 6px 20px;padding:0} li{margin:3px 0}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.4px}
+code,pre{font-family:ui-monospace,Consolas,monospace;font-size:13px}
+pre{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px;overflow:auto}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600}
+.pill.good{background:color-mix(in srgb,var(--good) 20%,transparent);color:var(--good)}
+.pill.warn{background:color-mix(in srgb,var(--warn) 20%,transparent);color:var(--warn)}
+.pill.bad{background:color-mix(in srgb,var(--bad) 20%,transparent);color:var(--bad)}
+.pill.info{background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent)}
+.callout{border-left:4px solid var(--accent);background:var(--panel2);padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0}
+.callout.warn{border-color:var(--warn)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.tabs button,.chip{padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer;font-size:14px}
+.tabs button.on,.chip.on{background:var(--accent2);border-color:var(--accent2);color:#fff}
+.pane{display:none}.pane.on{display:block}
+.steps{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.step{padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);cursor:pointer;font-size:14px}
+.step.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 30%,transparent)}
+.arrow{color:var(--muted)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+#graphwrap{background:radial-gradient(circle at 50% 40%,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:8px;margin:12px 0}
+#graph{width:100%;height:auto;display:block}
+.node{cursor:pointer;transition:r .2s}
+.node.weak{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{filter:drop-shadow(0 0 3px var(--bad))}50%{filter:drop-shadow(0 0 12px var(--bad))}}
+.flow{stroke-dasharray:6 6;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-12}}
+.legend span{margin-right:14px;font-size:13px;color:var(--muted)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.check{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--line)}
+.check input{margin-top:6px;accent-color:var(--good)}
+.bar{height:10px;border-radius:99px;background:var(--panel2);overflow:hidden;margin:8px 0}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0;transition:width .4s}
+.timeline{border-left:2px solid var(--line);margin-left:8px;padding-left:18px}
+.timeline .t{position:relative;margin:0 0 14px}
+.timeline .t:before{content:"";position:absolute;left:-26px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.timeline b{color:var(--accent)}
+@media (max-width:860px){
+  .layout{display:block} nav{position:static;height:auto;width:auto;border-right:0;border-bottom:1px solid var(--line)}
+  main{padding:20px 16px 60px}
+}
+@media print{
+  nav,.tabs,.noprint{display:none!important}
+  .pane{display:block!important}
+  body{background:#fff;color:#000}
+  :root{--bg:#fff;--panel:#fff;--panel2:#f4f6ff;--line:#ccd;--text:#000;--muted:#444}
+  section{break-inside:avoid-page}
+  .card,details{break-inside:avoid}
+  details{display:block} details>*{display:block}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <h1>Kakashi Tutor</h1>
+  <small>Technical document &middot; hackathon build</small>
+  <a href="#overview">1. Overview</a>
+  <a href="#problem">2. Problem statement</a>
+  <a href="#solution">3. Our solution</a>
+  <a href="#scope">4. Scope decisions</a>
+  <a href="#flows">5. Screens and flows</a>
+  <a href="#architecture">6. Architecture</a>
+  <a href="#graph">7. Concept graph (live)</a>
+  <a href="#grounding">8. NCERT grounding</a>
+  <a href="#stack">9. Tech stack</a>
+  <a href="#demo">10. Demo script</a>
+  <a href="#plan">11. Build plan and status</a>
+  <a href="#risks">12. Risks</a>
+  <a href="#open">13. Open items</a>
+  <a href="#scale">14. Scaling story</a>
+  <button class="noprint" onclick="window.print()">Save as PDF (print)</button>
+</nav>
+
+<main>
+<header class="hero" id="top">
+  <h2>Kakashi Tutor: the adaptive exam-prep tutor</h2>
+  <p>A test-first tutor for NCERT Class 10 Biology that models what each student understands, finds <em>why</em> they got things wrong, and gives teachers a clear view of how every student thinks.</p>
+  <p>Hackathon: Product Space &times; Wispr Flow &middot; Topic 02 &middot; Demo due tomorrow</p>
+  <div class="tags"><span>Multi-agent</span><span>Claude API</span><span>Learner model</span><span>Teacher-first</span><span>NCERT-grounded</span></div>
+</header>
+
+<section id="overview">
+  <h2><span class="n">1</span>Overview</h2>
+  <p class="lead">What the hackathon is, what we picked and why.</p>
+  <div class="card">
+    <h3>The hackathon</h3>
+    <p>Five topics were offered: media repurposing, adaptive tutor, meeting-to-execution agent, finance coach, career pivot coach. We pick one and build a working prototype.</p>
+    <h3>How we are scored</h3>
+    <table>
+      <tr><th>Criterion</th><th>Weight</th><th>Where we win it</th></tr>
+      <tr><td>Wispr Flow usage</td><td>20%</td><td>We dictate specs, prompts and posts with Wispr Flow while building, and record it as evidence</td></tr>
+      <tr><td>Prototype quality and UX</td><td>20%</td><td>Animated concept map, spoken tutor, clean student and teacher dashboards</td></tr>
+      <tr><td>AI integration</td><td>20%</td><td>Multi-agent system: ingestion, test builder, validator, diagnoser, explainer, fact-checker, teacher insights</td></tr>
+      <tr><td>Problem understanding</td><td>15%</td><td>Models understanding per concept and supports teachers instead of replacing them</td></tr>
+      <tr><td>LinkedIn content and engagement</td><td>15%</td><td>Shareable clips: same concept explained as Marvel vs cricket; the animated map</td></tr>
+      <tr><td>Innovation and creativity</td><td>10%</td><td>Interest-based explanations, per-student thinking profile for teachers</td></tr>
+    </table>
+  </div>
+  <div class="callout"><b>Why this topic:</b> it demos well, has a strong visual (the concept map), shows real AI depth (reasoning-based misconception detection), and the problem is clearly understood by judges. The meeting-to-execution agent was the runner-up.</div>
+</section>
+
+<section id="problem">
+  <h2><span class="n">2</span>Problem statement</h2>
+  <p class="lead">As given by the organizers, and the gap behind it.</p>
+  <div class="card">
+    <h3>The problem</h3>
+    <p>Generic AI tutors answer questions but do not track what a student actually understands. A wrong answer can mean a knowledge gap, a wrong belief, or a careless slip, and a normal tutor treats all three the same. Teachers only find class-wide gaps after the exam.</p>
+  </div>
+  <div class="card">
+    <h3>What the organizers require</h3>
+    <p class="noprint" style="color:var(--muted);font-size:14px">Status shows how our plan covers each item.</p>
+    <table>
+      <tr><th>Required</th><th>Our plan</th><th>Status</th></tr>
+      <tr><td>Diagnostic test</td><td>The first test in a topic serves as the diagnostic</td><td><span class="pill good">Planned</span></td></tr>
+      <tr><td>Concept graph for one syllabus</td><td>NCERT Class 10 Biology, built from the PDF into JSON</td><td><span class="pill good">Planned</span></td></tr>
+      <tr><td>Learner model updating mastery after every answer</td><td>Bayesian knowledge tracing in plain code</td><td><span class="pill good">Planned</span></td></tr>
+      <tr><td>Targeted question generation with difficulty calibration</td><td>Test-builder agent aims at weak concepts, within NCERT difficulty cap</td><td><span class="pill good">Planned</span></td></tr>
+      <tr><td>Misconception detection from reasoning</td><td>Diagnoser agent reads the student's written reasoning and confidence</td><td><span class="pill good">Planned</span></td></tr>
+      <tr><td>Spaced-repetition scheduling</td><td>Simple SM-2 style scheduler on weak concepts</td><td><span class="pill warn">Stretch</span></td></tr>
+      <tr><td>Teacher dashboard showing class gaps</td><td>Class heatmap, misconception clusters, per-student thinking profile</td><td><span class="pill good">Planned</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="solution">
+  <h2><span class="n">3</span>Our solution</h2>
+  <p class="lead">A test-first tutor that explains mistakes in the student's own world, and tells the teacher how each student thinks.</p>
+  <div class="grid">
+    <div class="card"><h3>1. Test with reasoning</h3><p>The student picks subject and topic and takes a short NCERT-only test. For each answer they rate confidence and may explain their reasoning.</p></div>
+    <div class="card"><h3>2. Learner model</h3><p>Mastery per concept updates after every answer. Mistakes are typed as careless, knowledge gap, or confident misconception.</p></div>
+    <div class="card"><h3>3. Explain my mistakes</h3><p>The tutor reviews wrong answers in the student's interest (Marvel, cricket, anything) and re-explains differently if the student says "I didn't get that".</p></div>
+    <div class="card"><h3>4. Teacher view</h3><p>Per-student thinking profile and class-wide gaps with ready teaching suggestions. The tutor supports the teacher; it does not replace them.</p></div>
+  </div>
+  <h3 style="margin-top:20px">What makes it different</h3>
+  <div class="grid">
+    <div class="card"><b>Interest-based explanations</b><p>Same concept, different analogy per student. Checked by a fact-checker agent so the analogy never teaches wrong science.</p></div>
+    <div class="card"><b>Reasoning-based diagnosis</b><p>We look at <em>why</em> the answer was given, not just whether it was right.</p></div>
+    <div class="card"><b>Confidence calibration</b><p>"Confidently wrong" means misconception. "Unsure and wrong" means a gap. Each gets different advice.</p></div>
+    <div class="card"><b>Root-cause tracing</b><p>A weak concept is traced back to its weak prerequisite, shown on the map.</p></div>
+    <div class="card"><b>Teacher-first</b><p>Per-student "how to approach this student" guidance, and a suggested 5-minute re-teach for each class gap.</p></div>
+    <div class="card"><b>Animated concept map</b><p>A glowing, interactive map and a tutor orb. Visual, memorable, clear.</p></div>
+  </div>
+</section>
+
+<section id="scope">
+  <h2><span class="n">4</span>Scope decisions</h2>
+  <p class="lead">What we decided in discussion, and why.</p>
+  <table>
+    <tr><th>Decision</th><th>Reason</th></tr>
+    <tr><td>Test-first product; no Study mode</td><td>Teachers teach; the tutor diagnoses and explains mistakes. Keeps the product honest and the build smaller.</td></tr>
+    <tr><td>Keep "explain my mistakes" after the test</td><td>Preserves the interest-based explanation, our main differentiator, without replacing the teacher.</td></tr>
+    <tr><td>Three logins: 1 teacher, 2 students</td><td>Simple, clear demo. Students A and B fail in different ways so the teacher sees two different profiles.</td></tr>
+    <tr><td>One subject: Class 10 Biology (NCERT)</td><td>Depth over breadth. More features, less data work.</td></tr>
+    <tr><td>Book pre-processed, not uploaded live</td><td>Processing a whole book takes minutes; demo is 2 to 3 minutes. Live failure risk is too high.</td></tr>
+    <tr><td>Text-to-text first, voice later</td><td>Core logic first. ElevenLabs speech added at the end for key moments only.</td></tr>
+    <tr><td>Plain Python + Anthropic SDK; no LangChain</td><td>Fastest to build and debug within one day. LangGraph is the production path.</td></tr>
+    <tr><td>Simulated class data (about 20 students), labeled</td><td>Two students make a thin class heatmap. Labeled as sample data.</td></tr>
+  </table>
+</section>
+
+<section id="flows">
+  <h2><span class="n">5</span>Screens and flows</h2>
+  <p class="lead">Choose a role to see its screens.</p>
+  <div class="tabs" data-tabs="flows">
+    <button class="on" data-p="stu">Student</button>
+    <button data-p="tea">Teacher</button>
+  </div>
+  <div class="pane on" data-pane="flows-stu">
+    <div class="card"><ol>
+      <li><b>Login</b> with a demo student account.</li>
+      <li><b>Dashboard</b>: subjects, topic list, past results, revision reminders.</li>
+      <li><b>Pick topic</b> (chapter and topic from the book).</li>
+      <li><b>Test</b>: one question at a time. Confidence rating on each, optional "explain your reasoning" box. Short: 4 to 5 questions for the demo.</li>
+      <li><b>Results</b>: score, plus the concept map in green, amber and red. Per question: right or wrong and why.</li>
+      <li><b>Review mistakes</b>: tutor explains each wrong answer in the student's interest. Student can say "explain it like a movie" or "I didn't get that".</li>
+      <li><b>My progress</b>: score history, mastery over time, misconceptions found, revision schedule.</li>
+    </ol></div>
+  </div>
+  <div class="pane" data-pane="flows-tea">
+    <div class="card"><ol>
+      <li><b>Login</b> as teacher.</li>
+      <li><b>Class overview</b>: concept heatmap, top misconceptions ("14 of 30 think X"), at-risk students.</li>
+      <li><b>Teaching suggestions</b>: for each gap, what to re-teach, a short explanation, an analogy, and 2 to 3 practice questions.</li>
+      <li><b>Student list</b>: Student A and Student B, with last test, score and trend.</li>
+      <li><b>Student thinking profile</b>: mastery map, misconceptions, mistake types (careless / gap / confident misconception), confidence vs correctness, which explanation style worked, and a short "how to approach this student" note.</li>
+      <li><b>Assign test</b> (stretch): pick a topic and target the class's weak concepts.</li>
+    </ol></div>
+  </div>
+  <div class="callout"><b>Demo contrast:</b> the test is designed so Student A fails mainly through one <em>misconception</em> and Student B mainly through a <em>prerequisite gap</em>. The teacher then sees two different approach suggestions for the same test.</div>
+</section>
+
+<section id="architecture">
+  <h2><span class="n">6</span>Architecture</h2>
+  <p class="lead">Click a step to see what it does. The LLM handles language; plain code handles numbers and decisions.</p>
+  <h3>Offline (once, before the demo)</h3>
+  <div class="steps" data-steps="off">
+    <div class="step on" data-i="0">NCERT PDF</div><span class="arrow">&rarr;</span>
+    <div class="step" data-i="1">Ingestion agent</div><span class="arrow">&rarr;</span>
+    <div class="step" data-i="2">Reviewed JSON</div><span class="arrow">&rarr;</span>
+    <div class="step" data-i="3">Cached tests</div>
+  </div>
+  <div class="card" id="off-info"></div>
+  <h3>Online (during use)</h3>
+  <div class="steps" data-steps="on">
+    <div class="step on" data-i="0">Student answers</div><span class="arrow">&rarr;</span>
+    <div class="step" data-i="1">Diagnoser</div><span class="arrow">&rarr;</span>
+    <div class="step" data-i="2">Learner model</div><span class="arrow">&rarr;</span>
+    <div class="step" data-i="3">Explainer + fact-checker</div><span class="arrow">&rarr;</span>
+    <div class="step" data-i="4">Teacher insights</div>
+  </div>
+  <div class="card" id="on-info"></div>
+
+  <h3 style="margin-top:20px">The agents</h3>
+  <table>
+    <tr><th>Part</th><th>Type</th><th>Job</th></tr>
+    <tr><td>Ingestion agent</td><td>LLM</td><td>Reads PDF text, extracts chapters and topics, drafts the concept graph and misconceptions</td></tr>
+    <tr><td>Test-builder agent</td><td>LLM</td><td>Generates questions for a topic from its source text only; tags concepts; distractors from known misconceptions; asks for reasoning</td></tr>
+    <tr><td>Validator agent</td><td>LLM + string match</td><td>Checks each question's quoted source passage exists and supports the answer; rejects out-of-syllabus or too-hard items</td></tr>
+    <tr><td>Diagnoser agent</td><td>LLM</td><td>Classifies a wrong answer as careless, gap, or misconception; names the misconception</td></tr>
+    <tr><td>Explainer agent</td><td>LLM</td><td>Explains in the student's interest and tone; handles "I didn't get that" with a different angle</td></tr>
+    <tr><td>Fact-checker agent</td><td>LLM</td><td>Checks every analogy against the concept's must-stay-true facts before the student sees it</td></tr>
+    <tr><td>Teacher-insights agent</td><td>LLM</td><td>Turns class and per-student data into teaching suggestions and approach notes</td></tr>
+    <tr><td>Learner model</td><td>Plain code</td><td>Bayesian knowledge tracing: mastery per concept after each answer</td></tr>
+    <tr><td>Scheduler</td><td>Plain code</td><td>SM-2 style spaced repetition (stretch)</td></tr>
+    <tr><td>Orchestrator</td><td>Plain code</td><td>Calls the agents in order and stores results</td></tr>
+  </table>
+  <div class="callout">Each agent is a function with its own prompt and structured (JSON) output. This is a real multi-agent design with a lightweight orchestrator, chosen for speed. LangGraph is the production path.</div>
+</section>
+
+<section id="graph">
+  <h2><span class="n">7</span>Concept graph (live preview)</h2>
+  <p class="lead">A plain JSON file of concepts and prerequisites. The map on the results screen is this data drawn on screen. This preview uses sample Biology concepts (Life Processes); the real graph will come from the NCERT text.</p>
+  <div class="legend"><span><i class="dot" style="background:var(--good)"></i>Strong</span><span><i class="dot" style="background:var(--warn)"></i>Shaky</span><span><i class="dot" style="background:var(--bad)"></i>Weak</span></div>
+  <div id="graphwrap"><svg id="graph" viewBox="0 0 760 360" role="img" aria-label="Concept graph"></svg></div>
+  <div class="noprint" style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="chip" id="sim">Simulate Student A</button>
+    <button class="chip" id="sim2">Simulate Student B</button>
+    <button class="chip" id="reset">Reset</button>
+  </div>
+  <div class="card" id="ninfo">Click a node to see details.</div>
+  <details><summary>What a concept looks like in the JSON</summary>
+<pre>{
+  "id": "photosynthesis",
+  "name": "Photosynthesis",
+  "prerequisites": ["autotrophic_nutrition"],
+  "must_stay_true": ["Chlorophyll absorbs light energy", "CO2 and water are converted to carbohydrates"],
+  "common_misconceptions": ["Plants take food from the soil"],
+  "source_text": "&lt;exact NCERT passage&gt;",
+  "page_refs": [90]
+}</pre></details>
+  <div class="grid" style="margin-top:12px">
+    <div class="card"><h3>Concept graph</h3><p>Same for everyone. Fixed content. A JSON file.</p></div>
+    <div class="card"><h3>Learner model</h3><p>Different per student. Mastery per concept, updated after each answer. Stored in the database.</p></div>
+  </div>
+  <p>It is not a memory graph or a graph database. Memory graphs matter when facts accumulate over time (as in the meeting-agent idea). Here the structure is fixed per syllabus.</p>
+</section>
+
+<section id="grounding">
+  <h2><span class="n">8</span>NCERT grounding</h2>
+  <p class="lead">Tests must come only from the book. No outside or hypothetical questions.</p>
+  <ol>
+    <li><b>Narrow input:</b> the test-builder sees only the selected topic's source text and concepts.</li>
+    <li><b>Strict prompt:</b> use only the provided text; no outside knowledge; NCERT Class 10 level.</li>
+    <li><b>Citation per question:</b> each question quotes the passage that supports its answer.</li>
+    <li><b>Validator:</b> checks the quote exists in the topic text and supports the answer; drops anything out of scope or too hard.</li>
+    <li><b>Difficulty cap:</b> recall, understanding, simple application only.</li>
+    <li><b>Manual review:</b> we read the demo test by hand before presenting.</li>
+  </ol>
+  <div class="callout warn"><b>Caveat:</b> LLMs can still leak outside facts or reword slightly. Citation plus validator reduce this a lot but not completely, hence the manual review.</div>
+  <p>The JSON stores the actual NCERT text and page references, so the results screen can say "Revise: NCERT page N".</p>
+</section>
+
+<section id="stack">
+  <h2><span class="n">9</span>Tech stack</h2>
+  <table>
+    <tr><th>Layer</th><th>Choice</th><th>Why</th></tr>
+    <tr><td>AI</td><td>Anthropic API (Sonnet-class for tutor, Haiku-class for quick checks)</td><td>Structured output and strong reasoning; no model training needed</td></tr>
+    <tr><td>Orchestration</td><td>Plain Python</td><td>Fastest for a one-day build; LangChain skipped, LangGraph for production</td></tr>
+    <tr><td>Backend</td><td>Python FastAPI</td><td>Matches our existing Python work</td></tr>
+    <tr><td>Frontend</td><td>React (Next.js) + Tailwind</td><td>Quick, good UI</td></tr>
+    <tr><td>Concept map</td><td>Three.js / react-force-graph-3d, with 2D fallback</td><td>Glowing, interactive, Jarvis-style visual</td></tr>
+    <tr><td>Database</td><td>SQLite</td><td>Zero setup for the demo</td></tr>
+    <tr><td>PDF</td><td>pypdf / pdfplumber (text-based PDF)</td><td>NCERT PDFs are text-based; no OCR needed</td></tr>
+    <tr><td>Voice output</td><td>ElevenLabs, with browser speech as fallback</td><td>Polished voice; free tier credits are limited, so cache clips</td></tr>
+    <tr><td>Voice input</td><td>Later: browser Web Speech API or Whisper</td><td>Decision deferred</td></tr>
+    <tr><td>Our build voice</td><td>Wispr Flow dictation</td><td>20% of the score; record as evidence</td></tr>
+  </table>
+  <div class="callout warn"><b>Note on Wispr Flow:</b> it is a dictation app we use to build. It is not the same as OpenAI Whisper, and we have not confirmed it offers an embeddable API. We should not claim it powers the product's voice input unless we verify that.</div>
+</section>
+
+<section id="demo">
+  <h2><span class="n">10</span>Demo script (about 3 minutes)</h2>
+  <div class="timeline card">
+    <div class="t"><b>0:00</b> Student A logs in, picks Biology, then chapter and topic.</div>
+    <div class="t"><b>0:20</b> Takes a short test (4 to 5 questions) with confidence and reasoning.</div>
+    <div class="t"><b>0:50</b> Results: animated concept map and tutor feedback in the student's interest.</div>
+    <div class="t"><b>1:30</b> Student B logs in briefly. Same topic, different mistakes, different explanation style.</div>
+    <div class="t"><b>2:00</b> Teacher login: class heatmap, A and B thinking profiles, teaching suggestions.</div>
+    <div class="t"><b>2:45</b> One line on the data pipeline and how it scales.</div>
+  </div>
+  <p>Demo safety: ingestion and the demo test are pre-generated and cached. A "Generate new test" button calls the agent live, with the cached test as backup.</p>
+</section>
+
+<section id="plan">
+  <h2><span class="n">11</span>Build plan and status</h2>
+  <p class="lead">Tick items as they are done. Your ticks are saved in this browser only.</p>
+  <div class="bar"><i id="pbar"></i></div>
+  <div id="pt" style="color:var(--muted);font-size:14px"></div>
+  <div id="checks"></div>
+</section>
+
+<section id="risks">
+  <h2><span class="n">12</span>Risks and mitigations</h2>
+  <table>
+    <tr><th>Risk</th><th>Impact</th><th>Mitigation</th></tr>
+    <tr><td>One-day deadline</td><td><span class="pill bad">High</span></td><td>Strict must-have order; cut the 3D visuals and speech before cutting the teacher dashboard</td></tr>
+    <tr><td>Wrong or out-of-syllabus questions</td><td><span class="pill bad">High</span></td><td>Source-only input, citation, validator, manual review of the demo test</td></tr>
+    <tr><td>Live AI call slow or failing on stage</td><td><span class="pill warn">Medium</span></td><td>Pre-generate and cache; live button is optional</td></tr>
+    <tr><td>Analogy teaches wrong biology</td><td><span class="pill warn">Medium</span></td><td>Fact-checker agent against must-stay-true facts</td></tr>
+    <tr><td>ElevenLabs credits run out</td><td><span class="pill warn">Medium</span></td><td>Short lines only; cache audio; browser speech fallback</td></tr>
+    <tr><td>3D map slow on demo laptop</td><td><span class="pill warn">Medium</span></td><td>Test early; 2D fallback mode</td></tr>
+    <tr><td>Thin class view with 2 students</td><td><span class="pill info">Low</span></td><td>Labeled simulated sample data (about 20 students)</td></tr>
+  </table>
+</section>
+
+<section id="open">
+  <h2><span class="n">13</span>Open items we need</h2>
+  <div class="card">
+    <ul>
+      <li>Anthropic API key in a <code>.env</code> file (never share it in chat).</li>
+      <li>NCERT Class 10 Science PDF (biology chapters). Confirm the source before downloading.</li>
+      <li>ElevenLabs account and a check of the current free-tier limits.</li>
+      <li>Confirm the stack: Python backend, React frontend.</li>
+      <li>Decide which interests the two demo students have (suggested: Marvel and cricket).</li>
+      <li>Decide whether voice input is required or optional (deferred).</li>
+      <li>Team split: who builds what, and who records Wispr Flow evidence and LinkedIn posts.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="scale">
+  <h2><span class="n">14</span>Scaling story (for the Q&amp;A)</h2>
+  <div class="card">
+    <ul>
+      <li>Today the book is pre-processed. In production a teacher uploads a book and the ingestion agent processes it in the background; topics appear when ready.</li>
+      <li>Large books are chunked by chapter and processed in parallel.</li>
+      <li>Move from SQLite to Postgres; orchestration moves to LangGraph for retries and state.</li>
+      <li>Add more subjects, boards and languages by adding new source books; the agents stay the same.</li>
+      <li>Add spaced repetition, voice input, story mode and score forecasting.</li>
+    </ul>
+  </div>
+</section>
+</main>
+</div>
+
+<script>
+// tabs
+document.querySelectorAll('.tabs').forEach(function(t){
+  var g=t.dataset.tabs;
+  t.querySelectorAll('button').forEach(function(b){
+    b.onclick=function(){
+      t.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      document.querySelectorAll('[data-pane^="'+g+'-"]').forEach(function(p){p.classList.remove('on')});
+      document.querySelector('[data-pane="'+g+'-'+b.dataset.p+'"]').classList.add('on');
+    };
+  });
+});
+
+// architecture steps
+var info={
+ off:[
+  ["NCERT PDF","The biology chapters of the Class 10 Science book, a text-based PDF. Text is extracted page by page."],
+  ["Ingestion agent","Reads the text, finds chapters and topics from the headings, and drafts for each topic: concepts, prerequisites, must-stay-true facts, common misconceptions, source text and page references."],
+  ["Reviewed JSON","We review and fix the draft by hand. The app reads this file; it never sends the whole book to the model."],
+  ["Cached tests","Test-builder and validator run ahead of time for the demo topics. The validated tests are saved so the demo loads instantly."]
+ ],
+ on:[
+  ["Student answers","Each answer carries the chosen option, a confidence rating and optional written reasoning."],
+  ["Diagnoser","Classifies a wrong answer as careless, knowledge gap, or confident misconception, and names the misconception using the concept's known list."],
+  ["Learner model","Plain code updates mastery for the tagged concepts (Bayesian knowledge tracing) and traces weak concepts back to weak prerequisites."],
+  ["Explainer + fact-checker","The explainer writes the explanation in the student's interest and tone. The fact-checker verifies it against the concept's must-stay-true facts before display. If the student says they did not understand, a new angle is generated and the style that works is remembered."],
+  ["Teacher insights","Aggregates per-student and class data into approach notes, misconception clusters and ready teaching suggestions."]
+ ]
+};
+document.querySelectorAll('[data-steps]').forEach(function(w){
+  var k=w.dataset.steps, box=document.getElementById(k+'-info');
+  function show(i){
+    w.querySelectorAll('.step').forEach(function(s){s.classList.toggle('on',+s.dataset.i===i)});
+    box.innerHTML='<h3>'+info[k][i][0]+'</h3><p>'+info[k][i][1]+'</p>';
+  }
+  w.querySelectorAll('.step').forEach(function(s){s.onclick=function(){show(+s.dataset.i)}});
+  show(0);
+});
+
+// concept graph
+var N=[
+ {id:'nut',n:'Nutrition',x:120,y:90,pre:[],t:'Why living things need food and how they get it.',m:'Food is only for energy.'},
+ {id:'auto',n:'Autotrophic',x:120,y:250,pre:[],t:'Organisms that make their own food.',m:'Plants take food from soil.'},
+ {id:'photo',n:'Photosynthesis',x:300,y:250,pre:['auto'],t:'Light energy, CO2 and water become carbohydrates.',m:'Plants absorb food through roots.'},
+ {id:'hetero',n:'Heterotrophic',x:300,y:90,pre:['nut'],t:'Organisms that depend on others for food.',m:'All animals eat the same way.'},
+ {id:'digest',n:'Human digestion',x:480,y:90,pre:['hetero'],t:'Breakdown of food along the alimentary canal.',m:'Digestion happens only in the stomach.'},
+ {id:'resp',n:'Respiration',x:480,y:250,pre:['photo','digest'],t:'Release of energy from food in cells.',m:'Breathing and respiration are the same.'},
+ {id:'trans',n:'Transportation',x:650,y:170,pre:['resp'],t:'Movement of materials around the body.',m:'Blood only carries oxygen.'}
+];
+var base={nut:.8,auto:.8,photo:.7,hetero:.75,digest:.7,resp:.7,trans:.6};
+var M=Object.assign({},base);
+var NS='http://www.w3.org/2000/svg', svg=document.getElementById('graph');
+function col(v){return v>=.7?'var(--good)':v>=.45?'var(--warn)':'var(--bad)'}
+function byId(i){return N.filter(function(x){return x.id===i})[0]}
+function draw(){
+  svg.innerHTML='';
+  N.forEach(function(n){n.pre.forEach(function(p){
+    var a=byId(p), l=document.createElementNS(NS,'line');
+    l.setAttribute('x1',a.x);l.setAttribute('y1',a.y);l.setAttribute('x2',n.x);l.setAttribute('y2',n.y);
+    l.setAttribute('stroke','var(--accent)');l.setAttribute('stroke-opacity','.55');l.setAttribute('stroke-width','2');
+    l.setAttribute('class','flow');svg.appendChild(l);
+  })});
+  N.forEach(function(n){
+    var g=document.createElementNS(NS,'g'), c=document.createElementNS(NS,'circle');
+    c.setAttribute('cx',n.x);c.setAttribute('cy',n.y);c.setAttribute('r',26);
+    c.setAttribute('fill',col(M[n.id]));c.setAttribute('fill-opacity','.9');
+    c.setAttribute('stroke','var(--text)');c.setAttribute('stroke-opacity','.35');
+    c.setAttribute('class','node'+(M[n.id]<.45?' weak':''));
+    var t=document.createElementNS(NS,'text');
+    t.setAttribute('x',n.x);t.setAttribute('y',n.y+46);t.setAttribute('text-anchor','middle');
+    t.setAttribute('fill','var(--text)');t.setAttribute('font-size','13');t.textContent=n.n;
+    g.appendChild(c);g.appendChild(t);
+    g.onclick=function(){sel(n)};
+    svg.appendChild(g);
+  });
+}
+function sel(n){
+  var v=M[n.id], lab=v>=.7?'Strong':v>=.45?'Shaky':'Weak';
+  var weakPre=n.pre.filter(function(p){return M[p]<.45}).map(function(p){return byId(p).n});
+  document.getElementById('ninfo').innerHTML='<h3>'+n.n+' &middot; mastery '+Math.round(v*100)+'% ('+lab+')</h3><p>'+n.t+'</p><p><b>Known misconception:</b> '+n.m+'</p>'+
+   (weakPre.length?'<p><b>Root cause:</b> weak prerequisite &rarr; '+weakPre.join(', ')+'</p>':'');
+}
+document.getElementById('sim').onclick=function(){M=Object.assign({},base,{hetero:.4,digest:.3,resp:.35,trans:.4});draw();sel(byId('digest'))};
+document.getElementById('sim2').onclick=function(){M=Object.assign({},base,{auto:.3,photo:.35,resp:.4});draw();sel(byId('photo'))};
+document.getElementById('reset').onclick=function(){M=Object.assign({},base);draw();document.getElementById('ninfo').textContent='Click a node to see details.'};
+draw();
+
+// checklist
+var items=[
+ "Set up project folder, .env, dependencies",
+ "Get NCERT biology PDF; extract text",
+ "Ingestion agent: chapters, topics, concept graph JSON",
+ "Review and fix the JSON by hand",
+ "Test-builder + validator; cache the demo test",
+ "Learner model (mastery update per answer)",
+ "Three logins and database (teacher + 2 students)",
+ "Student screens: dashboard, test, results",
+ "Diagnoser agent (misconception from reasoning)",
+ "Explainer + fact-checker; interest-based explanations; re-explain loop",
+ "Teacher dashboard: class heatmap, student profiles, suggestions",
+ "Simulated class data (labeled)",
+ "Animated concept map and tutor orb",
+ "ElevenLabs speech for key lines (cached)",
+ "Spaced repetition (stretch)",
+ "Rehearse the 3-minute demo; record Wispr Flow evidence; LinkedIn post"
+];
+var key='tutor_doc_checks', saved={};
+try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+var cw=document.getElementById('checks');
+function upd(){
+  var d=cw.querySelectorAll('input:checked').length;
+  document.getElementById('pbar').style.width=(100*d/items.length)+'%';
+  document.getElementById('pt').textContent=d+' of '+items.length+' done';
+}
+items.forEach(function(t,i){
+  var r=document.createElement('label');r.className='check';
+  var c=document.createElement('input');c.type='checkbox';c.checked=!!saved[i];
+  c.onchange=function(){saved[i]=c.checked;try{localStorage.setItem(key,JSON.stringify(saved))}catch(e){};upd()};
+  var s=document.createElement('span');s.textContent=t;
+  r.appendChild(c);r.appendChild(s);cw.appendChild(r);
+});
+upd();
+
+// nav highlight
+var links=document.querySelectorAll('nav a');
+var obs=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id)})}
+})},{rootMargin:'-20% 0px -70% 0px'});
+document.querySelectorAll('section').forEach(function(s){obs.observe(s)});
+</script>
+</body>
+</html>
